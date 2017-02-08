@@ -1,4 +1,4 @@
-import {GETDATA, SETBOOK} from './actionTypes';
+import {GETDATA, SETBOOK} from '../../constants/library/actionTypes';
 import axios from 'axios';
 const bookAPI = axios.create({
   baseURL: 'https://www.googleapis.com',

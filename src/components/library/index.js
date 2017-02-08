@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {browserHistory, routerShape} from 'react-router';
-import * as actions from './actions';
+import * as actions from '../../actionCreator/library/actions';
 import AutoSuggest from './inputSearch';
 import BookCard from './bookCard';
 

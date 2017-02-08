@@ -1,4 +1,4 @@
-import {SETBOOK} from './actionTypes';
+import {SETBOOK} from '../../constants/library/actionTypes';
 export default function(state = {}, action) {
   switch (action.type) {
     case SETBOOK:

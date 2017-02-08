@@ -6,8 +6,8 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import ReduxPromise from 'redux-promise';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import reducers from './rootReducer';
-import routes from './routes';
+import reducers from './reducers/rootReducer';
+import routes from './routes/indexRoute';
 
 injectTapEventPlugin();
 

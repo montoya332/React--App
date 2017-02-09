@@ -8,9 +8,12 @@ import Library from '../components/library/index';
 import ErrorPage404 from '../components/general/404error';
 
 const AppRoutes = (
-	<Route path="/" component={App}>
-		<IndexRedirect to="library" />
-		<Route path="library" component={Library} />
+	<Route>
+		<Route path="/" component={App}>
+			<IndexRedirect to="library" />
+			<Route path="library" component={Library} />
+			
+		</Route>
 		<Route path="*" component={ ErrorPage404 }/>
 	</Route>
 )

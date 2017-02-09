@@ -11,6 +11,9 @@ import routes from './routes/indexRoute';
 
 injectTapEventPlugin();
 
+import '../style/style.scss';
+
+
 const createStoreWithMiddleware = compose(applyMiddleware(
     ReduxPromise
   ),typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'

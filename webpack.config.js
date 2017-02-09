@@ -3,6 +3,7 @@ var path = require('path');
 var webpack = require('webpack');
 var assetPath = '/assets/';
 var absolutePath = path.join(__dirname, 'build', assetPath);
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = (env, argv) => {
 	return {
@@ -69,7 +70,7 @@ module.exports = (env, argv) => {
 		},
 		devServer: {
 			historyApiFallback: true,
-			contentBase: './',
+			contentBase: './public',
 			port: argv.port || 8081,
 			hot: true,
 			stats: {

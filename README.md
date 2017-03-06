@@ -16,17 +16,19 @@ Builds the app for production
 ```
 React--App/
 	README.md
-	node_modules/
-	package.json
-	public/
-		index.html
-	src/
-		actionCreator/
-		components/
-			app.js
-		constants/
-		reducers/
-		routes/
-		index.js
+	server/
+	client/
+		node_modules/
+		package.json
+		public/
+			index.html
+		src/
+			actionCreator/
+			components/
+				app.js
+			constants/
+			reducers/
+			routes/
+			index.js
 
 ```

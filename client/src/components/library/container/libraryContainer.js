@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {browserHistory, routerShape} from 'react-router';
-import * as actions from '../../../actionCreator/library/actions';
+import * as LibraryActions from '../../../actionCreator/library/actions';
 import {InputSearch,BookCard} from '../.';
 
 class LibraryComponent extends Component {
@@ -38,7 +38,7 @@ class LibraryComponent extends Component {
 						<div className="row">
 							<div className="input-field col s12 m6">
 								 <i className="material-icons prefix top-spacer">search</i>
-								 <InputSearch placeholder="search" setBookId={this.updateURL} />
+								 <InputSearch {...this.props} placeholder="search" setBookId={this.updateURL} />
 							</div> 
 							<div className="col s12 m6">
 								{this.renderBook()}
@@ -58,7 +58,7 @@ function mapStateToProps(state,ownProps) {
 	};
 }
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators(actions, dispatch);
+	return bindActionCreators(LibraryActions, dispatch);
 }
 LibraryComponent.contextTypes = { router: routerShape.isRequired }
 export default connect(mapStateToProps, mapDispatchToProps)(LibraryComponent);

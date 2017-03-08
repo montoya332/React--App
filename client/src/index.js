@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import ReduxPromise from 'redux-promise';
+import ReduxThunk from 'redux-thunk';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import reducers from './reducers/rootReducer';
 import routes from './routes/indexRoute';
@@ -13,9 +14,9 @@ injectTapEventPlugin();
 
 import '../style/style.scss';
 
-
+const middleware = [ReduxThunk, ReduxPromise];
 const createStoreWithMiddleware = compose(applyMiddleware(
-    ReduxPromise
+    ...middleware
   ),typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
     ? window.devToolsExtension()
   : f => f)(createStore)

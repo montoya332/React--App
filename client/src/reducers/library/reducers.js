@@ -1,9 +1,19 @@
-import {SETBOOK} from '../../constants/library/actionTypes';
-export default function(state = {}, action) {
-  switch (action.type) {
-    case SETBOOK:
-      return action.payload.data;
-  }
+import Immutable, { fromJS, List } from 'immutable';
+import * as ACTIONTYPES from '../../constants/library/actionTypes';
+const INITIAL_STATE = {};
 
-  return state;
+export default function(state = fromJS(INITIAL_STATE), action) {
+	const { payload = {}, params = {} } = action;
+	const { data = {} } = payload;
+	let newState = {};
+	switch (action.type) {
+		case ACTIONTYPES.SETBOOK:
+			return setBook(state,data,params)
+	}
+
+	return state;
 };
+
+function setBook(state, data = {}, params = {}) {
+	return fromJS(data)
+}

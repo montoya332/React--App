@@ -6,84 +6,85 @@ import Autosuggest from 'react-autosuggest';
 import * as actions from '../../actionCreator/library/actions';
 
 const getSuggestionValue = suggestion => {
-  const {title} = suggestion.volumeInfo;
-  return title;
+	const {title} = suggestion.volumeInfo;
+	return title;
 }
 const renderSuggestion = suggestion => {
-  const {title, authors=[] } = suggestion.volumeInfo;
-  return (
-    <span>
-        <span className="title">{title}</span>
-        <p>{authors.join(', ')}</p>
-    </span>
-  );
+	const {title, authors=[] } = suggestion.volumeInfo;
+	return (
+		<span>
+				<span className="title">{title}</span>
+				<p>{authors.join(', ')}</p>
+		</span>
+	);
 }
 
 class AutoSuggestComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: '',
-      suggestions: []
-    };
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			value: '',
+			suggestions: []
+		};
+		this.onSuggestionsFetchRequested = _.throttle(this.onSuggestionsFetchRequested.bind(this), 1000);
 
-  getSuggestions = (value) => {
-    const inputValue = value.trim().toLowerCase();
-    const inputLength = inputValue.length;
+	}
 
-    return inputLength === 0 ? [] : languages.filter(lang =>
-      lang.name.toLowerCase().slice(0, inputLength) === inputValue
-    );
-  };
+	getSuggestions = (value) => {
+		const inputValue = value.trim().toLowerCase();
+		const inputLength = inputValue.length;
 
-  onChange = (event, { newValue }) => {
-    this.setState({
-      value: newValue
-    });
-  };
-  onSuggestionsFetchRequested = ({ value }) => {
-      this.props.getData(value).then(({payload:{data={}}}) => {
-        data.items && this.setState({
-          suggestions: data.items
-        });
-      });
-  };
-  onSuggestionSelected = (event, { suggestion }) =>{
-      this.props.setBookId && this.props.setBookId(suggestion.id);
-  };
+		return inputLength === 0 ? [] : languages.filter(lang =>
+			lang.name.toLowerCase().slice(0, inputLength) === inputValue
+		);
+	};
 
-  onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: []
-    });
-  };
+	onChange = (event, { newValue }) => {
+		this.setState({
+			value: newValue
+		});
+	};
+	onSuggestionsFetchRequested = ({ value }) => {
+			this.props.getData(value).then(({payload:{data={}}}) => {
+				data.items && this.setState({
+					suggestions: data.items
+				});
+			});
+	};
+	onSuggestionSelected = (event, { suggestion }) =>{
+			this.props.setBookId && this.props.setBookId(suggestion.id);
+	};
 
-  render() {
-    const { value, suggestions } = this.state;
-    const { ...props } = this.props;
-    const inputProps = {
-      placeholder: props.placeholder || '',
-      value,
-      onChange: this.onChange
-    };
+	onSuggestionsClearRequested = () => {
+		this.setState({
+			suggestions: []
+		});
+	};
 
-    return (
-      <Autosuggest
-        suggestions={suggestions}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        getSuggestionValue={getSuggestionValue}
-        renderSuggestion={renderSuggestion}
-        onSuggestionSelected={this.onSuggestionSelected}
-        inputProps={inputProps}
-      />
-    );
-  }
+	render() {
+		const { value, suggestions } = this.state;
+		const { ...props } = this.props;
+		const inputProps = {
+			placeholder: props.placeholder || '',
+			value,
+			onChange: this.onChange
+		};
+		return (
+			<Autosuggest
+				suggestions={suggestions}
+				onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+				onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+				getSuggestionValue={getSuggestionValue}
+				renderSuggestion={renderSuggestion}
+				onSuggestionSelected={this.onSuggestionSelected}
+				inputProps={inputProps}
+			/>
+		);
+	}
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actions, dispatch);
+	return bindActionCreators(actions, dispatch);
 }
 
 export default connect(null, mapDispatchToProps)(AutoSuggestComponent);

@@ -15,5 +15,5 @@ export default function(state = fromJS(INITIAL_STATE), action) {
 };
 
 function setBook(state, data = {}, params = {}) {
-	return fromJS(data).toJS()
+	return fromJS(data)
 }

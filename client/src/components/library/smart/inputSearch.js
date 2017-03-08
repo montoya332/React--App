@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 import Autosuggest from 'react-autosuggest';
-import * as actions from '../../../actionCreator/library/actions';
+import * as actions from 'ReactApp/actionCreator/library/actions';
 
 const getSuggestionValue = suggestion => {
 	const {title} = suggestion.volumeInfo;

@@ -66,6 +66,9 @@ module.exports = (env, argv) => {
 			}]
 		},
 		resolve: {
+			alias: {
+				'ReactApp': path.resolve(__dirname, './src'),
+			},
 			extensions: ['.js', '.jsx']
 		},
 		devServer: {

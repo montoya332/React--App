@@ -12,7 +12,7 @@ import routes from './routes/indexRoute';
 
 injectTapEventPlugin();
 
-import '../style/style.scss';
+// import '../styles/style.scss';
 
 const middleware = [ReduxThunk, ReduxPromise];
 const createStoreWithMiddleware = compose(applyMiddleware(

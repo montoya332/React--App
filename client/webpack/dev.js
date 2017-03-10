@@ -7,12 +7,13 @@ class WebpackDevConfig extends WebpackBaseConfig {
 
   constructor() {
     super();
+
     this.config = {
       devtool: 'cheap-module-source-map',
       entry: [
         'webpack-dev-server/client?http://0.0.0.0:8000/',
         'webpack/hot/only-dev-server',
-        './index.js'//'./src/index.js'
+        './index.js'
       ],
       plugins: [
         new webpack.HotModuleReplacementPlugin(),

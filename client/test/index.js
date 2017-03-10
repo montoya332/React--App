@@ -14,6 +14,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 /* Set up testing environment */
 global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
 global.window = global.document.defaultView;
+global.navigator = { userAgent: 'all' };
 const $ = jquery(global.window);
 
 /* build */

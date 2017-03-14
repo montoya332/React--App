@@ -96,7 +96,7 @@ class WebpackBaseConfig {
 					}],
 				}, {
 					test: /\.css$/,
-					use: ['style-loader', 'css-loader'],
+					use: 'css-loader'
 				}, {
 					test: /\.scss$/,
 					use: ExtractTextPlugin.extract({
@@ -124,8 +124,7 @@ class WebpackBaseConfig {
 					components: `${this.srcPathAbsolute}/components/`,
 					constants: `${this.srcPathAbsolute}/constants/`,
 					stores: `${this.srcPathAbsolute}/reducers/`,
-					routes: `${this.srcPathAbsolute}/routes/`,
-					styles: `${this.srcPathAbsolute}/styles/`
+					routes: `${this.srcPathAbsolute}/routes/`
 				},
 				extensions: ['.js', '.jsx'],
 				modules: [

@@ -32,6 +32,7 @@ class WebpackTestConfig extends WebpackBaseConfig {
 			],
 			externals: {
 				cheerio: 'window',
+				"jsdom": "window",
 				'react/addons': 'true',
 				'react/lib/ExecutionEnvironment': 'true',
 				'react/lib/ReactContext': 'true',
@@ -57,8 +58,8 @@ class WebpackTestConfig extends WebpackBaseConfig {
 					}
 				}, {
 					test: /\.(js|jsx)$/,
+					loader: 'babel-loader',
 					include: [].concat( this.includedPackages, [ this.srcPathAbsolute, this.testPathAbsolute ] )
-
 				}, {
 					test: /^.((?!cssmodule).)*\.(sass|scss)$/,
 					loader: 'null-loader'

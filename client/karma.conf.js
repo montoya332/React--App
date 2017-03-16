@@ -6,24 +6,26 @@ module.exports = function(config) {
 	config.set({
 
 		// base path that will be used to resolve all patterns (eg. files, exclude)
-		basePath: '',
+		// basePath: '',
 		webpack: webpackCfg,
 		webpackServer: {
 			noInfo: false
 		},
 		// frameworks to use
 		// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-		frameworks: [ 'mocha', 'chai', 'sinon' ],
+		frameworks: ['mocha', 'chai', 'sinon'],
 		client: {
 			mocha: {}
+		},
+		mochaReporter: {
+			output: 'autowatch'
 		},
 
 		// list of files / patterns to load in the browser
 		files: [
-			// 'test/components/**/*.js',
+			// 'test/index.js',
 			'test/loadtest.js'
 		],
-
 
 		// list of files to exclude
 		exclude: [],
@@ -32,6 +34,7 @@ module.exports = function(config) {
 		// preprocess matching files before serving them to the browser
 		// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
 		preprocessors: {
+			// 'test/index.js': ['webpack', 'sourcemap'],
 			'test/loadtest.js': ['webpack', 'sourcemap']
 		},
 
@@ -70,6 +73,33 @@ module.exports = function(config) {
 
 		// Concurrency level
 		// how many browser should be started simultaneous
-		concurrency: Infinity
+		concurrency: Infinity,
+
+		junitReporter: {
+			outputDir: 'coverage',
+			outputFile: 'junit-result.xml',
+			useBrowserName: false
+		},
+		coverageReporter: {
+			dir: 'coverage/',
+			watermarks: {
+				statements: [70, 80],
+				functions: [70, 80],
+				branches: [70, 80],
+				lines: [70, 80]
+			},
+			reporters: [{
+				type: 'text'
+			}, {
+				type: 'html',
+				subdir: 'html'
+			}, {
+				type: 'cobertura',
+				subdir: 'cobertura'
+			}, {
+				type: 'lcovonly',
+				subdir: 'lcov'
+			}]
+		}
 	})
 }

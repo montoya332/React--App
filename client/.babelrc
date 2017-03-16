@@ -1,5 +1,5 @@
 {
-	"presets": ["react", "es2015", "airbnb"],
+	"presets": ["es2015", "react", "stage-1"],
 	"plugins": [
 		["module-resolver", {
 			"alias": {
@@ -12,5 +12,14 @@
 				"styles": "./src/styles/"
 			}
 		}]
-	]
+	],
+	"env": {
+		"test": {
+			"plugins": [
+				"transform-decorators-legacy",
+				"transform-object-rest-spread",
+				"istanbul"
+			]
+		}
+	}
 }

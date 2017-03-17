@@ -6,40 +6,45 @@ const fs = require('fs');
 const assetPath = '/assets/';
 const absolutePath = path.join(__dirname, 'build', assetPath);
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const npmBase = path.join(__dirname, '../../node_modules');
+const npmBase = path.join(__dirname, '../node_modules');
 
 class WebpackBaseConfig {
 
 	constructor() {
-		this._config = {};
-	}
-	/* Get the list of included packages */
+			this._config = {};
+		}
+		/* Get the list of included packages */
 	get includedPackages() {
-		return [].map((pkg) => fs.realpathSync(path.join(npmBase, pkg)));
-	}
-	/*  Set the config data */
+			return [].map((pkg) => fs.realpathSync(path.join(npmBase, pkg)));
+		}
+		/*  Set the config data */
 	set config(data) {
-		this._config = Object.assign({}, this.defaultSettings, data);
-		return this._config;
-	}
-	/*  Get the global config */
+			this._config = Object.assign({}, this.defaultSettings, data);
+			return this._config;
+		}
+		/*  Get the global config */
 	get config() {
-		return this._config;
-	}
-	/*  Get the environment name */
+			return this._config;
+		}
+		/*  Get the environment name */
 	get env() {
-		return 'dev';
-	}
-	/* Get the absolute path to src directory */
+			return 'dev';
+		}
+		/* Get the absolute path to src directory */
 	get srcPathAbsolute() {
-		return path.resolve('./src');
-	}
-	/* Get the absolute path to tests directory */
+			return path.resolve('./src');
+		}
+		/* Get the absolute path to tests directory */
 	get testPathAbsolute() {
-		return path.resolve('./test');
-	}
-	/* Get the default settings */
+			return path.resolve('./test');
+		}
+		/* Get the default settings */
 	get defaultSettings() {
+		const cssModulesQuery = {
+			modules: true,
+			importLoaders: 1,
+			localIdentName: '[name]-[local]-[hash:base64:5]'
+		};
 		return {
 			context: this.srcPathAbsolute,
 			devtool: 'eval',
@@ -58,7 +63,7 @@ class WebpackBaseConfig {
 				hot: true,
 				inline: true,
 				port: 8000,
-				stats:{
+				stats: {
 					cached: false,
 					colors: true,
 					hash: false,
@@ -76,44 +81,38 @@ class WebpackBaseConfig {
 			},
 			module: {
 				rules: [{
-					test: /\.jsx?$/,
-					exclude: /node_modules/,
-					use: [{
-						loader: 'react-hot-loader'
+					enforce: 'pre',
+					test: /\.js?$/,
+					include: this.srcPathAbsolute,
+					loader: 'babel-loader',
+					query: {
+						presets: ['es2015', 'react', 'stage-1']
+					}
+				}, {
+					test: /\.(js|jsx)$/,
+					include: [].concat(
+						this.includedPackages, [this.srcPathAbsolute]
+					)
+
+				}, {
+					test: /^.((?!cssmodule).)*\.(sass|scss)$/,
+					loaders: [{
+						loader: 'style-loader'
 					}, {
-						loader: 'babel-loader',
-						query: {
-							presets: ['es2015', 'react', 'stage-1']
-						}
+						loader: 'css-loader'
+					}, {
+						loader: 'sass-loader'
 					}]
 				}, {
-					test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?.*$|$)/,
-					use: [{
-						loader: 'file-loader',
-						options: {
-							name: 'resources/[name].[ext]',
-						}
-					}],
-				}, {
-					test: /\.css$/,
-					use: ['style-loader', 'css-loader'],
-				}, {
-					test: /\.scss$/,
-					use: ExtractTextPlugin.extract({
-						fallback: 'style-loader',
-						use: [{
-							loader: 'css-loader',
-							options: {
-								sourceMap: true,
-								importLoaders: 1
-							}
-						}, {
-							loader: 'sass-loader',
-							options: {
-								sourceMap: true
-							}
-						}]
-					})
+					test: /\.cssmodule\.(sass|scss)$/,
+					loaders: [{
+						loader: 'style-loader'
+					}, {
+						loader: 'css-loader',
+						query: cssModulesQuery
+					}, {
+						loader: 'sass-loader'
+					}]
 				}]
 			},
 			plugins: [],
@@ -124,10 +123,9 @@ class WebpackBaseConfig {
 					components: `${this.srcPathAbsolute}/components/`,
 					constants: `${this.srcPathAbsolute}/constants/`,
 					stores: `${this.srcPathAbsolute}/reducers/`,
-					routes: `${this.srcPathAbsolute}/routes/`,
-					styles: `${this.srcPathAbsolute}/styles/`
+					routes: `${this.srcPathAbsolute}/routes/`
 				},
-				extensions: ['.js', '.jsx'],
+				extensions: ['.js', '.jsx', '.scss'],
 				modules: [
 					this.srcPathAbsolute,
 					'node_modules'

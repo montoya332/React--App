@@ -2,6 +2,7 @@
 /* Default dev server configuration. */
 const webpack = require('webpack');
 const WebpackBaseConfig = require('./common');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 class WebpackDevConfig extends WebpackBaseConfig {
 
@@ -16,6 +17,7 @@ class WebpackDevConfig extends WebpackBaseConfig {
         './index.js'
       ],
       plugins: [
+        new ExtractTextPlugin('bundle.css'),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin()
       ]

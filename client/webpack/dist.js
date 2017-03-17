@@ -11,7 +11,7 @@ class WebpackDistConfig extends WebpackBaseConfig {
       cache: false,
       devtool: 'source-map',
       entry: [
-        './index.js'//'./src/index.js'
+        './index.js'
       ],
       plugins: [
         new webpack.DefinePlugin({

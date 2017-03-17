@@ -5,3 +5,8 @@ npm-debug.log
 # IntelliJ
 *.iml
 /.idea
+
+TEST*.xml
+coverage
+build/Release
+dist/

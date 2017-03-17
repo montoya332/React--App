@@ -5,25 +5,21 @@ const webpackConfigs = require('./webpack');
 const defaultConfig = 'dev'; //dev , dist, test
 
 module.exports = (configName) => {
-console.log('configName',configName)
-  // If there was no configuration give, assume default
-  const requestedConfig = configName || defaultConfig;
 
-  // Return a new instance of the webpack config
-  // or the default one if it cannot be found.
-  let LoadedConfig = defaultConfig;
+		const requestedConfig = configName || defaultConfig;
 
-  if (webpackConfigs[requestedConfig] !== undefined) {
-    LoadedConfig = webpackConfigs[requestedConfig];
-  } else {
-    console.warn('Missing Env');
-    LoadedConfig = {};
-  }
+		let LoadedConfig = defaultConfig;
 
-  const loadedInstance = new LoadedConfig();
+		if (webpackConfigs[requestedConfig] !== undefined) {
+				LoadedConfig = webpackConfigs[requestedConfig];
+		} else {
+				console.warn('Missing Env');
+				LoadedConfig = {};
+		}
 
-  // Set the global environment
-  process.env.NODE_ENV = loadedInstance.env;
+		const loadedInstance = new LoadedConfig();
 
-  return loadedInstance.config;
+		process.env.NODE_ENV = loadedInstance.env;
+
+		return loadedInstance.config;
 };

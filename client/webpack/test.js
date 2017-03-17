@@ -49,14 +49,6 @@ class WebpackTestConfig extends WebpackBaseConfig {
 			],
 			module: {
 				rules: [{
-					enforce: 'pre',
-					test: /\.js?$/,
-					include: this.srcPathAbsolute,
-					loader: 'babel-loader',
-					query: {
-						presets: ['es2015', 'react', 'stage-1']
-					}
-				}, {
 					test: /\.(js|jsx)$/,
 					loader: 'babel-loader',
 					include: [].concat( this.includedPackages, [ this.srcPathAbsolute, this.testPathAbsolute ] )

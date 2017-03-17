@@ -6,7 +6,7 @@ const fs = require('fs');
 const assetPath = '/assets/';
 const absolutePath = path.join(__dirname, 'build', assetPath);
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const npmBase = path.join(__dirname, '../../node_modules');
+const npmBase = path.join(__dirname, '../node_modules');
 
 class WebpackBaseConfig {
 

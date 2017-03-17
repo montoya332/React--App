@@ -1,86 +1,60 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import {getBooks} from 'actionCreator/general/googleApi';
+import AutoComplete from 'material-ui/AutoComplete';
+import {CardHeader} from 'material-ui/Card';
 import _ from 'lodash';
-import Autosuggest from 'react-autosuggest';
-import * as actions from 'ReactApp/actionCreator/library/actions';
-
-const getSuggestionValue = suggestion => {
-	const {title} = suggestion.volumeInfo;
-	return title;
-}
-const renderSuggestion = suggestion => {
-	const {title, authors=[] } = suggestion.volumeInfo;
-	return (
-		<span>
-				<span className="title">{title}</span>
-				<p>{authors.join(', ')}</p>
-		</span>
-	);
-}
 
 class AutoSuggestComponent extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			value: '',
-			suggestions: []
+			dataSource: []
 		};
-		this.onSuggestionsFetchRequested = _.throttle(this.onSuggestionsFetchRequested.bind(this), 1000);
-
+		this.onUpdateInput = _.throttle(this.onUpdateInput.bind(this), 1000);
 	}
-
-	getSuggestions = (value) => {
-		const inputValue = value.trim().toLowerCase();
-		const inputLength = inputValue.length;
-
-		return inputLength === 0 ? [] : languages.filter(lang =>
-			lang.name.toLowerCase().slice(0, inputLength) === inputValue
-		);
-	};
-
-	onChange = (event, { newValue }) => {
-		this.setState({
-			value: newValue
+	onUpdateInput(searchText){
+		let dataSource = []
+		searchText && getBooks({ q: searchText, maxResults:5}).then(({data={}}) => {
+			if(data.items){
+				dataSource =  data.items.map( item => {
+					return renderSuggestion(item)
+				})
+			}
+			this.setState({ dataSource });
 		});
-	};
-	onSuggestionsFetchRequested = ({ value }) => {
-			this.props.getData(value).then(({payload:{data={}}}) => {
-				data.items && this.setState({
-					suggestions: data.items
-				});
-			});
-	};
-	onSuggestionSelected = (event, { suggestion }) =>{
-			this.props.setBookId && this.props.setBookId(suggestion.id);
-	};
-
-	onSuggestionsClearRequested = () => {
-		this.setState({
-			suggestions: []
-		});
-	};
-
+	}
+	onNewRequest(chosenRequest, index){
+		const book = this.state.dataSource[index] || {}
+		book.id && this.props.setBookId(book.id);
+	}
 	render() {
-		const { value, suggestions } = this.state;
-		const { ...props } = this.props;
-		const inputProps = {
-			placeholder: props.placeholder || '',
-			value,
-			onChange: this.onChange
-		};
+		const { dataSource } = this.state;
 		return (
-			<Autosuggest
-				suggestions={suggestions}
-				onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-				onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-				getSuggestionValue={getSuggestionValue}
-				renderSuggestion={renderSuggestion}
-				onSuggestionSelected={this.onSuggestionSelected}
-				inputProps={inputProps}
-			/>
+			<div>
+				<AutoComplete
+					hintText="search"
+					filter={AutoComplete.noFilter}
+					openOnFocus={true}
+					onNewRequest={this.onNewRequest}
+					onUpdateInput={this.onUpdateInput}
+					dataSource={dataSource}
+				/>
+			</div>
 		);
 	}
 }
-
+const renderSuggestion = book => {
+	const { title, subtitle, imageLinks } = book.volumeInfo;
+	return {
+		id: book.id,
+		text: title,
+		value: (
+			<CardHeader
+			  title={title}
+			  subtitle={subtitle}
+			  avatar={imageLinks.thumbnail}
+			/>
+		),
+	};
+}
 export default AutoSuggestComponent;

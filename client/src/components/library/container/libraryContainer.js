@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {browserHistory, routerShape} from 'react-router';
-import * as LibraryActions from '../../../actionCreator/library/actions';
+import RefreshIndicator from 'material-ui/RefreshIndicator';
+
+import * as LibraryActions from 'actionCreator/library/actions';
 import {InputSearch,BookCard} from '../.';
 
-class LibraryComponent extends Component {
+export class LibraryComponent extends Component {
 	constructor(props) {
 		const {search} = props.query;
 		super(props);
@@ -23,12 +25,24 @@ class LibraryComponent extends Component {
 			this.props.setBook(id);
 		}
 	}
-	renderBook() {
-		const {volumeInfo} = this.props.book
-		if( !volumeInfo ){
-			return  false
+	renderBook(props) {
+		const active = this.props.book.get('active')
+		const loading = this.props.book.get('loading')
+		const loadingContainer =  {
+			position: 'relative',
+		};
+
+		if( loading ){
+			return	(
+				<div style={loadingContainer}>
+					<RefreshIndicator size={40} left={50}  top={50} status="loading" />
+				</div>
+			)
 		}
-		return  <BookCard {...volumeInfo} />;
+		if( !active ){
+			return  null
+		}
+		return  <BookCard {...active} />;
 	}
 	render() {
 		return (
@@ -51,11 +65,9 @@ class LibraryComponent extends Component {
 }
 
 function mapStateToProps(state,ownProps) {
-	const book = state.libraryBook || {};
+	const book = state.libraryBook;
 	const {query} = ownProps.location;
-	return { query,
-		book: book.toJS(),
-	};
+	return { query,book };
 }
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators(LibraryActions, dispatch);

@@ -2,7 +2,7 @@ import * as ACTIONTYPES from '../../constants/library/actionTypes';
 import {getBook, getBooks} from 'actionCreator/general/googleApi';
 export function getData(query) {
 	return dispatch => {
-		//TODO: dispatch Loading
+		dispatch({type: ACTIONTYPES.GETDATALOADING, payload: query })
 		return getBooks({ q: query, maxResults:5})
 			.catch(function (error) {
 				if (error.response) {
@@ -15,7 +15,7 @@ export function getData(query) {
 
 export function setBook(id) {
 	return dispatch => {
-		//TODO: dispatch Loading
+		dispatch({type: ACTIONTYPES.SETBOOKLOADING, payload: {id} })
 		return getBook({id})
 			.catch((error) => {error})
 			.then(response => dispatch({type: ACTIONTYPES.SETBOOK, payload: response }))

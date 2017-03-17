@@ -119,7 +119,7 @@ class WebpackBaseConfig {
 			resolve: {
 				alias: {
 					ReactApp: `${this.srcPathAbsolute}/`,
-					actions: `${this.srcPathAbsolute}/actionsCreator/`,
+					actionCreator: `${this.srcPathAbsolute}/actionCreator/`,
 					components: `${this.srcPathAbsolute}/components/`,
 					constants: `${this.srcPathAbsolute}/constants/`,
 					stores: `${this.srcPathAbsolute}/reducers/`,

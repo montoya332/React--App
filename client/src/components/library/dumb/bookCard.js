@@ -1,18 +1,24 @@
 import React from 'react';
+import {Card, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 
 export default (props) => {
+
 	return (
-		<div className="card hoverable">
-			<div className="card-image">
-				<img src={props.imageLinks.thumbnail} />
-				<span className="card-title">{props.title}</span>
-			</div>
-			<div className="card-content">
-				<p>{props.subtitle}</p>
-			</div>
-			<div className="card-action">
-				<a href={props.infoLink}>More Info</a>
-			</div>
-		</div>
-	);
+		<Card style={{width:'500px'}}>
+			<CardHeader
+			  title={props.title}
+			  subtitle={props.subtitle}
+			  avatar={props.imageLinks.thumbnail}
+			/>
+			<CardMedia
+			  overlay={<CardTitle title={props.title} subtitle={props.subtitle} />}
+			>
+			  <img src={props.imageLinks.thumbnail} />
+			</CardMedia>
+			<CardTitle title={props.title} subtitle={props.subtitle} />
+			<CardText>
+			  {props.description}
+			</CardText>
+		</Card>
+		)
 }

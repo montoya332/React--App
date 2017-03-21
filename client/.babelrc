@@ -4,7 +4,8 @@
 		["module-resolver", {
 			"alias": {
 				"ReactApp": "./src",
-				"actions": "./src/actionsCreator/",
+				"Test": "./test",
+				"actionCreator": "./src/actionCreator/",
 				"components": "./src/components/",
 				"constants": "./src/constants/",
 				"stores": "./src/reducers/",

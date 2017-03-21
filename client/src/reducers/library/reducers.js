@@ -1,5 +1,5 @@
 import Immutable, { fromJS, List } from 'immutable';
-import * as ACTIONTYPES from '../../constants/library/actionTypes';
+import * as ACTIONTYPES from 'constants/library/actionTypes';
 export const INITIAL_STATE = {
 	loading: false,
 	active:null
@@ -18,10 +18,10 @@ export default function(state = fromJS(INITIAL_STATE), action) {
 	}
 	return state;
 };
-function loading(state, bool=true) {
+export function loading(state, bool=true) {
 	return state.set('loading', bool)
 }
-function setBook(state, data = {}, params = {}) {
+export function setBook(state, data = {}, params = {}) {
 	if(data.volumeInfo){
 		return state.set('active',data.volumeInfo)
 	}

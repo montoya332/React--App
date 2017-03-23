@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import ReduxPromise from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import reducers from './reducers/rootReducer';
-import routes from './routes/indexRoute';
+import routes,{AppRoutes} from './routes/indexRoute';
+import {
+  BrowserRouter as Router
+} from 'react-router-dom'
+import createBrowserHistory from 'history/createBrowserHistory'
+
+const history = createBrowserHistory()
 
 injectTapEventPlugin();
 
@@ -22,9 +27,11 @@ const createStoreWithMiddleware = compose(applyMiddleware(
   : f => f)(createStore)
 
 ReactDOM.render(
-	<MuiThemeProvider>
-  		<Provider store={createStoreWithMiddleware(reducers)}>
-    		<Router history={browserHistory} routes={routes}/>
-  		</Provider>
-  	</MuiThemeProvider>
+  <MuiThemeProvider>
+      <Provider store={createStoreWithMiddleware(reducers)}>
+        <Router>
+          <AppRoutes />
+        </Router>
+      </Provider>
+    </MuiThemeProvider>
 , document.querySelector('#App'));

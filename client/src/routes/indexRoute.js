@@ -1,21 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route, IndexRoute, IndexRedirect, browserHistory } from 'react-router';
-
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
+import { Switch } from 'react-router'
 import App from '../components/app';
 import {LibraryContainer} from '../components/library/index';
 import ErrorPage404 from '../components/general/404error';
 
-const AppRoutes = (
-	<Route>
-		<Route path="/" component={App}>
-			<IndexRedirect to="library" />
-			<Route path="library" component={LibraryContainer} />
-			
-		</Route>
-		<Route path="*" component={ ErrorPage404 }/>
-	</Route>
-)
+//<IndexRedirect to="library" />
+export const AppRoutes = () => {
+	return (
+		<App>
+			<Switch>
+				<Route path="/library" component={LibraryContainer}/>
+				<Route component={ ErrorPage404 }/>
+			</Switch>
+		</App>
+    )
+}
 
 export default AppRoutes
+
+

@@ -9,9 +9,9 @@ import {InputSearch,BookCard} from '../.';
 
 export class LibraryComponent extends Component {
 	constructor(props) {
-		const {search} = props.query;
+		//const {search} = props.query;
 		super(props);
-		search && this.props.setBook(search);
+		//search && this.props.setBook(search);
 		//this.updateURL = this.updateURL.bind(this);
 	}
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {browserHistory, routerShape} from 'react-router';
+// import {browserHistory, routerShape} from 'react-router';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import * as LibraryActions from 'actionCreator/library/actions';
@@ -9,19 +9,19 @@ import {InputSearch,BookCard} from '../.';
 
 export class LibraryComponent extends Component {
 	constructor(props) {
-		const {search} = props.query;
+		//const {search} = props.query;
 		super(props);
-		search && this.props.setBook(search);
-		this.updateURL = this.updateURL.bind(this);
+		//search && this.props.setBook(search);
+		//this.updateURL = this.updateURL.bind(this);
 	}
 
 	updateURL(id) {
 		if (id && id != this.props.query.search){
-			this.context.router.push({
-				pathname: location.pathname,
-				query: { search: id },
-				state: { search: id }
-			});
+			// this.context.router.push({
+			// 	pathname: location.pathname,
+			// 	query: { search: id },
+			// 	state: { search: id }
+			// });
 			this.props.setBook(id);
 		}
 	}
@@ -72,5 +72,5 @@ function mapStateToProps(state,ownProps) {
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators(LibraryActions, dispatch);
 }
-LibraryComponent.contextTypes = { router: routerShape.isRequired }
+//LibraryComponent.contextTypes = { router: routerShape.isRequired }
 export default connect(mapStateToProps, mapDispatchToProps)(LibraryComponent);

@@ -4,6 +4,9 @@ export class ComposeMessage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { text: '' }
+		this.sendMessage = this.sendMessage.bind(this)
+		this.updateText = this.updateText.bind(this)
+
 	}
 	updateText(ev) {
 		this.setState({ text: ev.target.value });

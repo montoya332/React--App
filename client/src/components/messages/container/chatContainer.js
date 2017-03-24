@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import UserList from './UserList'
-import MessageList from './messageList'
-import ComposeMessage from './messages'
+import UserList from '../smart/UserList'
+import MessageList from '../dumb/messageList'
+import ComposeMessage from '../smart/messages'
 export class ChatApp extends Component {
   constructor(props) {
     super(props);

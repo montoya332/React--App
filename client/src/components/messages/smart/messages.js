@@ -28,7 +28,7 @@ export class ComposeMessage extends Component {
 			<form className="flex flex-row flex-space-between" onSubmit={this.sendMessage}>
 				<input type="text" name="text" className="flex flex-1"
 				value={this.state.text} onChange={this.updateText} />
-				<button className="button-primary" type="submit">Send</button>
+				<button className="button button-primary" type="submit">Send</button>
 			</form>
 		)
 	}

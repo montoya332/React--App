@@ -1,29 +1,43 @@
 import React from 'react';
 import moment from 'moment';
+import {List, ListItem} from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
+import Avatar from 'material-ui/Avatar';
+import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
 
 export default (props) => {
-  const renderMessage = (message={}, index) =>{
-    const sender = message.sentBy || {};
-   return (
-    <div className="message flex flex-row" key={index}>
-      <img src={sender.avatar || PLACEHOLDER} alt={sender.email} className="avatar" />
-      <div className="message-wrapper">
-        <p className="message-header">
-          <span className="username font-600">{sender.email}</span>
-          <span className="sent-date font-300">
-            {moment(message.createdAt).format('MMM Do, hh:mm:ss')}
-          </span>
-        </p>
-        <p className="message-content font-300">
-          {message.text}
-        </p>
-      </div>
-    </div>
-    )
-  }
-  return (
-    <main className="chat flex flex-column flex-1 clear">
-      {props.messages.map(renderMessage)}
-    </main>
-    )
+	const renderMessage = (message={}, index,list) =>{
+		const sender = message.sentBy || {};
+		const isLastTile = list.length  == index + 1
+		return (
+			<div key={index}>
+				<ListItem
+					leftAvatar={<Avatar src={sender.avatar || PLACEHOLDER} alt={sender.email} />}
+					primaryText="Brunch this weekend?"
+					secondaryText={
+						<p>
+							<span style={{color: darkBlack}}>{sender.email}</span> --
+							{moment(message.createdAt).format('MMM Do, hh:mm:ss')} --
+							{message.text}
+						</p>
+					}
+					secondaryTextLines={2}
+				/>
+				{!isLastTile && <Divider inset={true} />}
+			</div>
+		)
+	}
+	return (
+		<div>
+			<List>
+				<Subheader>Messages</Subheader>
+				{props.messages.map(renderMessage)}
+			</List>
+		</div>
+	)
 }

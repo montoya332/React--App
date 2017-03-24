@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import UserList from '../smart/UserList'
 import MessageList from '../dumb/messageList'
 import ComposeMessage from '../smart/messages'
+import { Row, Column } from 'react-foundation';
 export class ChatApp extends Component {
   constructor(props) {
     super(props);
@@ -42,13 +43,18 @@ export class ChatApp extends Component {
   }
 
   render() {
-    return <div className="flex flex-row flex-1 clear">
-      <UserList users={this.state.users} />
+    return (
+        <Row className="display">
+    <Column small={6} large={6}><UserList users={this.state.users} /></Column>
+    <Column small={6} large={6}>
       <div className="flex flex-column col col-9">
         <MessageList users={this.state.users} messages={this.state.messages} />
         <ComposeMessage />
       </div>
-    </div>
+      </Column>
+
+  </Row>
+      )
   }
 }
 

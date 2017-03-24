@@ -123,7 +123,8 @@ class WebpackBaseConfig {
 					components: `${this.srcPathAbsolute}/components/`,
 					constants: `${this.srcPathAbsolute}/constants/`,
 					stores: `${this.srcPathAbsolute}/reducers/`,
-					routes: `${this.srcPathAbsolute}/routes/`
+					routes: `${this.srcPathAbsolute}/routes/`,
+					utils: `${this.srcPathAbsolute}/utils/`
 				},
 				extensions: ['.js', '.jsx', '.scss'],
 				modules: [

@@ -18,7 +18,7 @@ export default (props) => {
 			<div key={index}>
 				<ListItem
 					leftAvatar={<Avatar src={sender.avatar || PLACEHOLDER} alt={sender.email} />}
-					primaryText="Brunch this weekend?"
+					primaryText={sender.email}
 					secondaryText={
 						<p>
 							<span style={{color: darkBlack}}>{sender.email}</span> --

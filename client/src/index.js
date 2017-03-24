@@ -12,6 +12,7 @@ import {
   BrowserRouter as Router
 } from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
+import './socket_io_Test'
 
 const history = createBrowserHistory()
 

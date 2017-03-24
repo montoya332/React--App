@@ -15,7 +15,7 @@ export const AppRoutes = () => {
 	return (
 		<App>
 			<Switch>
-				<Route path="/library" component={LibraryContainer}/>
+				<Route exact path="/library" component={LibraryContainer}/>
 				<Route component={ ErrorPage404 }/>
 			</Switch>
 		</App>

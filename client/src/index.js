@@ -12,13 +12,14 @@ import {
   BrowserRouter as Router
 } from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
-import './socket_io_Test'
+import '../styles/style.scss';
+import { app } from 'utils/socketio';
 
 const history = createBrowserHistory()
 
 injectTapEventPlugin();
 
-import '../styles/style.scss';
+
 
 const middleware = [ReduxThunk, ReduxPromise];
 const createStoreWithMiddleware = compose(applyMiddleware(
@@ -27,7 +28,13 @@ const createStoreWithMiddleware = compose(applyMiddleware(
     ? window.devToolsExtension()
   : f => f)(createStore)
 
-ReactDOM.render(
+
+app.authenticate({
+  type: 'local',
+  'email': 'montoya332@live.com',
+  'password': 'test123'
+}).then(function(result){
+   ReactDOM.render(
   <MuiThemeProvider>
       <Provider store={createStoreWithMiddleware(reducers)}>
         <Router>
@@ -36,3 +43,8 @@ ReactDOM.render(
       </Provider>
     </MuiThemeProvider>
 , document.querySelector('#App'));
+}).catch(function(error){
+  console.error('Error authenticating!', error);
+})
+
+

@@ -9,7 +9,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import reducers from './reducers/rootReducer';
 import routes,{AppRoutes} from './routes/indexRoute';
 import {
-  BrowserRouter as Router
+	BrowserRouter as Router
 } from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
 import '../styles/style.scss';
@@ -23,28 +23,20 @@ injectTapEventPlugin();
 
 const middleware = [ReduxThunk, ReduxPromise];
 const createStoreWithMiddleware = compose(applyMiddleware(
-    ...middleware
-  ),typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
-    ? window.devToolsExtension()
-  : f => f)(createStore)
+		...middleware
+	),typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
+		? window.devToolsExtension()
+	: f => f)(createStore)
+window.app = app
 
+const store = createStoreWithMiddleware(reducers)
 
-app.authenticate({
-  type: 'local',
-  'email': 'montoya332@live.com',
-  'password': 'test123'
-}).then(function(result){
-   ReactDOM.render(
-  <MuiThemeProvider>
-      <Provider store={createStoreWithMiddleware(reducers)}>
-        <Router>
-          <AppRoutes />
-        </Router>
-      </Provider>
-    </MuiThemeProvider>
+ReactDOM.render(
+	<MuiThemeProvider>
+		<Provider store={store}>
+			{AppRoutes(store)}
+		</Provider>
+	</MuiThemeProvider>
 , document.querySelector('#App'));
-}).catch(function(error){
-  console.error('Error authenticating!', error);
-})
 
 

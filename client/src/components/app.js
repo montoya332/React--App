@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from './header/index.js';
+import Header from './general/headerBar';
 
 export default class App extends Component {
 	render() {

@@ -26,7 +26,7 @@ export class LoginContainer extends Component {
 		return (
 				<Row className="display">
 					<Column small={6} large={6}> 
-						<button onClick={this.onSubmit}>Log in</button>
+						<button className="button" onClick={this.onSubmit}>Log in</button>
 					</Column>
 				</Row>
 			)

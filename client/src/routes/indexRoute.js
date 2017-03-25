@@ -19,11 +19,11 @@ import LoginContainer from '../components/general/containers/loginContainer';
 import createHistory from 'history/createBrowserHistory'
 const history = createHistory()
 export const PublicRoutes = ({store}) => {
-	// const clientUser = store.getState().clientUser.get('token')
-	// console.log(clientUser)
+
 	return (
 			<Switch>
 				<Route path="/login" component={LoginContainer}/>
+				<Redirect to={{  pathname: '/login' }}/> 
 			</Switch>
 	)
 }
@@ -38,44 +38,18 @@ export const PrivateRoutes = (props) => {
 		</App>
 	)
 }
-const AuthPrivateRoutes = ({ store, component, ...rest }) => {
-  
-
-	console.log('store',fakeAuth.isAuthenticated, store.getState())
-
-
-  return <Route {...rest} render={props => (
-    fakeAuth.isAuthenticated 
-    ? ( <PrivateRoutes /> 
-    	) : (
-      <Redirect to={{  pathname: '/login',  state: { from: props.location } }}/> 
-    )
-  )}/>
-}
-/* -------- */
-const AuthRoutes = withRouter(({ history,store,...rest }) => (
-  store.getState().clientUser.get('token') ? (
+export const AuthPrivateRoutes = withRouter(({ history,store,...rest }) => {
+  return store.getState().clientUser.get('token') ? (
     <PrivateRoutes {...rest} />
   ) : (
     <PublicRoutes {...rest} />
   )
-))
-const fakeAuth = {
-	isAuthenticated: false,
-	authenticate(cb) {
-		this.isAuthenticated = true
-	},
-	signout(cb) {
-		this.isAuthenticated = false
-	}
-}
-
-
+})
 export const AppRoutes = (store) => {
 	return (
 		<Router history={history}>
 			<div>
-				<AuthRoutes store={store}/>
+				<AuthPrivateRoutes store={store}/>
 			</div>
 		</Router>
     )

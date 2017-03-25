@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import {
 	browserHistory,
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  withRouter
+	BrowserRouter as Router,
+	Route,
+	Link,
+	Redirect,
+	withRouter
 } from 'react-router-dom'
 import { Switch } from 'react-router'
 import App from '../components/app';
@@ -15,13 +15,14 @@ import {LibraryContainer} from '../components/library/index';
 import ErrorPage404 from '../components/general/404error';
 import ChatApp from '../components/messages/container/chatContainer'
 import { app } from 'utils/socketio';
+import LoginContainer from '../components/general/containers/loginContainer';
 
 export const PublicRoutes = () => {
 	return (
-		<div>
-			<Route path="/public" component={Public}/>
-			<Route path="/login" component={LoginComponent}/>
-		</div>
+			<Switch>
+				<Route path="/public" component={Public}/>
+				<Route path="/login" component={LoginContainer}/>
+			</Switch>
 	)
 }
 export const PrivateRoutes = () => {
@@ -35,18 +36,20 @@ export const PrivateRoutes = () => {
 		</App>
 	)
 }
-const AuthPrivateRoutes = ({ component, ...rest }) => (
-  <Route {...rest} render={props => (
-    fakeAuth.isAuthenticated ? (
-      React.createElement(component, props)
-    ) : (
-      <Redirect to={{
-        pathname: '/login',
-        state: { from: props.location }
-      }}/>
+const AuthPrivateRoutes = ({ store, component, ...rest }) => {
+  
+
+	console.log('store',fakeAuth.isAuthenticated, store.getState())
+
+
+  return <Route {...rest} render={props => (
+    fakeAuth.isAuthenticated 
+    ? ( <PrivateRoutes /> 
+    	) : (
+      <Redirect to={{  pathname: '/login',  state: { from: props.location } }}/> 
     )
   )}/>
-)
+}
 /* -------- */
 
 const fakeAuth = {
@@ -114,20 +117,19 @@ class LoginComponent extends Component {
     )
   }
 }
-const AuthButton = withRouter(({ history }) => (
-  fakeAuth.isAuthenticated ? (
-    <PrivateRoutes/>
-  ) : (
-    <PublicRoutes/>
-  )
-))
+// const AuthButton = withRouter(({ history }) => (
+//   fakeAuth.isAuthenticated ? (
+//     <PrivateRoutes/>
+//   ) : (
+//     <PublicRoutes/>
+//   )
+// ))
 export const AppRoutes = (store) => {
-	console.log('store', store.getState())
 	return (
 		<Router>
 			<div>
 				<PublicRoutes/>
-				<AuthPrivateRoutes path="/protected" component={Protected}/>
+				<AuthPrivateRoutes store={store} path="/protected" component={Protected}/>
 			</div>
 		</Router>
     )

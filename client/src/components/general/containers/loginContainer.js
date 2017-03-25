@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Column } from 'react-foundation';
-
+import * as ClientUserActions from 'actionCreator/general/clientUser'
 export class LoginContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -13,7 +13,9 @@ export class LoginContainer extends Component {
 	componentDidMount() {
 	}
 	onSubmit(e){
-		console.log(e)
+		const email = 'montoya332@live.com'
+		const password = 'test123'
+		this.props.signin && this.props.signin({email,password})
 	}
 	render() {
 		return (
@@ -26,10 +28,10 @@ export class LoginContainer extends Component {
 	}
 }
 function mapStateToProps(state,ownProps) {
-	const clientUser = state.clientUser;
+	const clientUser = state.clientUser.toJS();
 	return { clientUser };
 }
 function mapDispatchToProps(dispatch) {
-	return bindActionCreators({}, dispatch);
+	return bindActionCreators(ClientUserActions, dispatch);
 }
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

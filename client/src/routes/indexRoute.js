@@ -16,16 +16,18 @@ import ErrorPage404 from '../components/general/404error';
 import ChatApp from '../components/messages/container/chatContainer'
 import { app } from 'utils/socketio';
 import LoginContainer from '../components/general/containers/loginContainer';
-
-export const PublicRoutes = () => {
+import createHistory from 'history/createBrowserHistory'
+const history = createHistory()
+export const PublicRoutes = ({store}) => {
+	// const clientUser = store.getState().clientUser.get('token')
+	// console.log(clientUser)
 	return (
 			<Switch>
-				<Route path="/public" component={Public}/>
 				<Route path="/login" component={LoginContainer}/>
 			</Switch>
 	)
 }
-export const PrivateRoutes = () => {
+export const PrivateRoutes = (props) => {
 	return (
 		<App>
 			<Switch>
@@ -51,85 +53,29 @@ const AuthPrivateRoutes = ({ store, component, ...rest }) => {
   )}/>
 }
 /* -------- */
-
+const AuthRoutes = withRouter(({ history,store,...rest }) => (
+  store.getState().clientUser.get('token') ? (
+    <PrivateRoutes {...rest} />
+  ) : (
+    <PublicRoutes {...rest} />
+  )
+))
 const fakeAuth = {
 	isAuthenticated: false,
 	authenticate(cb) {
-		var self = this
-		console.log('authenticate')
-		app.authenticate({
-			type: 'local',
-			'email': 'montoya332@live.com',
-			'password': 'test123'
-		}).then(function(result) {
-			console.log('authenticate')
-			self.isAuthenticated = true
-			console.log(self)
-		}).catch(function(error) {
-			console.error('Error authenticating!', error);
-		})
+		this.isAuthenticated = true
 	},
 	signout(cb) {
-		var self = this
-		app.logout().then(function(result) {
-			self.isAuthenticated = false
-		})
+		this.isAuthenticated = false
 	}
 }
 
 
-const Public = () => <h3>Public</h3>
-const Protected = () => <h3>Protected</h3>
-
-class LoginComponent extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			redirectToReferrer: false
-		}
-		this.login = this.login.bind(this)
-	}
-
-  login () {
-    fakeAuth.authenticate(() => {
-      this.setState({ redirectToReferrer: true })
-    })
-  }
-
-  render() {
-  	const { redirectToReferrer } = this.state
-  	const {location} = this.props
-  	const {state} = location
-    const { from } = state || { from: { pathname: '/' } }
-    
-    
-    if (redirectToReferrer) {
-      return (
-        <Redirect to={from}/>
-      )
-    }
-    
-    return (
-      <div>
-        <p>You must log in to view the page at {from.pathname}</p>
-        <button onClick={this.login}>Log in</button>
-      </div>
-    )
-  }
-}
-// const AuthButton = withRouter(({ history }) => (
-//   fakeAuth.isAuthenticated ? (
-//     <PrivateRoutes/>
-//   ) : (
-//     <PublicRoutes/>
-//   )
-// ))
 export const AppRoutes = (store) => {
 	return (
-		<Router>
+		<Router history={history}>
 			<div>
-				<PublicRoutes/>
-				<AuthPrivateRoutes store={store} path="/protected" component={Protected}/>
+				<AuthRoutes store={store}/>
 			</div>
 		</Router>
     )

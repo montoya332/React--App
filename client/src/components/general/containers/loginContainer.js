@@ -10,8 +10,13 @@ export class LoginContainer extends Component {
 		this.onSubmit = this.onSubmit.bind(this)
 	}
 
-	componentDidMount() {
+	componentWillReceiveProps(nextProps) {
+		const onChangeClientUser = nextProps.clientUser.token != this.props.clientUser.token
+		if(onChangeClientUser){
+			nextProps.history.push('/messages', { some: 'state' })
+		}
 	}
+
 	onSubmit(e){
 		const email = 'montoya332@live.com'
 		const password = 'test123'

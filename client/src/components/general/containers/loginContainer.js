@@ -19,11 +19,34 @@ export class LoginContainer extends Component {
 
 	onSubmit(e){
 		e.preventDefault();
+		const {signin,signup,forgotpassword} = this.props
+		const {hash} = this.props.location
 		const email = this.textEmail.value || 'montoya332@live.com'
 		const password = this.textPassword.value || 'test123'
-		this.props.signin && this.props.signin({email,password})
+		switch (hash) {
+			case '#signup':
+				return signup && signup({email,password})
+			case '#forgotpassword':
+				return forgotpassword && forgotpassword({email,password})
+			default :
+				return signin && signin({email,password})
+		}
+	}
+	getButtonText(){
+		const {hash} = this.props.location
+		let btnText = 'Log in'
+		if(hash == '#signup'){
+			btnText = 'Sign Up'
+		} else if(hash == '#forgotpassword'){
+			btnText = 'Send Email'
+		}
+		return btnText
 	}
 	render() {
+		const {hash} = this.props.location
+		const showSignUp = hash == '#signup'
+		const btnText = this.getButtonText()
+
 		return (
 			<div className="form__signin__container">
 				<Row className="display">
@@ -36,11 +59,12 @@ export class LoginContainer extends Component {
 							<div className="form__signin__group">
 								<input className="form-control" placeholder="Password" type="password" name="user[password]" ref={(input) => { this.textPassword = input; }}/>
 							</div>
-							<button type="submit" className="button expanded">Log in</button>
+							<button type="submit" className="button expanded">{btnText}</button>
 							<br />
 							<div>
-								<a className="float-left text-color-white" href="#0">Forgot password</a>
-								<a className="float-right text-color-white" href="#0">New here? Sign Up</a>
+								<a className="float-left text-color-white" href="#forgotpassword">Forgot password</a>
+								{!showSignUp && <a className="float-right text-color-white" href="#signup">New here? Sign Up</a>}
+								{showSignUp && <a className="float-right text-color-white" href="#">Log In</a>}
 							</div>
 						</form>
 					</Column>

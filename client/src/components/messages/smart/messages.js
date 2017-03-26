@@ -17,7 +17,7 @@ export class ComposeMessage extends Component {
 		const messageService = app.service('messages');
 		// Create a new message with the text from the input field
 		messageService.create({
-		text: this.state.text
+			text: this.state.text
 		}).then(() => this.setState({ text: '' }));
 
 		ev.preventDefault();

@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import {
-  BrowserRouter as Router,
-  Route
+	browserHistory,
+	BrowserRouter as Router,
+	Route,
+	Link,
+	Redirect,
+	withRouter
 } from 'react-router-dom'
 import { Switch } from 'react-router'
 import App from '../components/app';
 import {LibraryContainer} from '../components/library/index';
 import ErrorPage404 from '../components/general/404error';
 import ChatApp from '../components/messages/container/chatContainer'
-//<IndexRedirect to="library" />
-export const AppRoutes = () => {
+import { app } from 'utils/socketio';
+import LoginContainer from '../components/general/containers/loginContainer';
+import createHistory from 'history/createBrowserHistory'
+const history = createHistory()
+export const PublicRoutes = ({store}) => {
+
+	return (
+			<Switch>
+				<Route path="/login" component={LoginContainer}/>
+				<Redirect to={{  pathname: '/login' }}/> 
+			</Switch>
+	)
+}
+export const PrivateRoutes = (props) => {
 	return (
 		<App>
 			<Switch>
@@ -20,6 +36,22 @@ export const AppRoutes = () => {
 				<Route component={ ErrorPage404 }/>
 			</Switch>
 		</App>
+	)
+}
+export const AuthPrivateRoutes = withRouter(({ history,store,...rest }) => {
+  return store.getState().clientUser.get('token') ? (
+    <PrivateRoutes {...rest} />
+  ) : (
+    <PublicRoutes {...rest} />
+  )
+})
+export const AppRoutes = (store) => {
+	return (
+		<Router history={history}>
+			<div>
+				<AuthPrivateRoutes store={store}/>
+			</div>
+		</Router>
     )
 }
 

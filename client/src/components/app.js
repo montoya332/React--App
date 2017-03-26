@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from './header/index.js';
+import Header from './general/headerBar';
 
 export default class App extends Component {
 	render() {
@@ -7,7 +7,7 @@ export default class App extends Component {
 			<div>
 				<Header {...this.props} />
 				<div className="application__content">
-				{this.props.children}
+					{this.props.children}
 				</div>
 			</div>
 		);

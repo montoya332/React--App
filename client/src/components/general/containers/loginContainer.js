@@ -37,8 +37,15 @@ export class LoginContainer extends Component {
 								<input className="form-control" placeholder="Password" type="password" name="user[password]" ref={(input) => { this.textPassword = input; }}/>
 							</div>
 							<button type="submit" className="button expanded">Log in</button>
+							<br />
+							<div>
+								<a className="float-left text-color-white" href="#0">Forgot password</a>
+								<a className="float-right text-color-white" href="#0">New here? Sign Up</a>
+							</div>
 						</form>
 					</Column>
+					<Column small={12} large={3}/>
+					
 				</Row>
 			</div>
 			)

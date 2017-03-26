@@ -10,3 +10,9 @@ export  const XXLARGE_SCREEN_BREAKPOINT = 1440;
 export const api = axios.create({
 	baseURL: 'http://localhost:3030',
 });
+export function getLocationQuery(location={}) {
+	location.search = location.search || ''
+	let search = location.search.substring(1);
+	return search ? JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}',
+                 function(key, value) { return key===""?value:decodeURIComponent(value) }):{}
+}

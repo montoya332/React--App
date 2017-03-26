@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import {browserHistory, routerShape} from 'react-router';
+import { Row, Column } from 'react-foundation';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import * as LibraryActions from 'actionCreator/library/actions';
 import {InputSearch,BookCard} from '../.';
+import { getLocationQuery } from 'utils/utils';
 
 export class LibraryComponent extends Component {
 	constructor(props) {
-		//const {search} = props.query;
 		super(props);
-		//search && this.props.setBook(search);
-		//this.updateURL = this.updateURL.bind(this);
+		this.updateURL = this.updateURL.bind(this);
 	}
 
 	updateURL(id) {
-		if (id && id != this.props.query.search){
-			// this.context.router.push({
-			// 	pathname: location.pathname,
-			// 	query: { search: id },
-			// 	state: { search: id }
-			// });
-			this.props.setBook(id);
+		const {location, history, setBook} = this.props
+		const query = getLocationQuery(location)
+		if (id && id != state.search){
+			history.push({
+				pathname: location.pathname,
+				state: { search: id }
+			});
+			setBook && setBook(id);
 		}
 	}
 	renderBook(props) {
@@ -46,20 +46,22 @@ export class LibraryComponent extends Component {
 	}
 	render() {
 		return (
-			<div>
-				<div className="container">
-					<h3>Library</h3>
-						<div className="row">
-							<div className="input-field col s12 m6">
-								 <i className="material-icons prefix top-spacer">search</i>
-								 <InputSearch {...this.props} placeholder="search" setBookId={this.updateURL} />
-							</div> 
-							<div className="col s12 m6">
-								{this.renderBook()}
+			<Row className="display">
+					<Column small={12} large={3}/>
+					<Column small={12} large={6}>
+						<h3>Library</h3>
+							<div className="row">
+								<div className="input-field col s12 m6">
+									 <i className="material-icons prefix top-spacer">search</i>
+									 <InputSearch {...this.props} placeholder="search" setBookId={this.updateURL} />
+								</div> 
+								<div className="col s12 m6">
+									{this.renderBook()}
+								</div>
 							</div>
-						</div>
-				</div>
-			</div>
+					</Column>
+				<Column small={12} large={3}/>
+			</Row>
 		);
 	}
 }
@@ -72,5 +74,4 @@ function mapStateToProps(state,ownProps) {
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators(LibraryActions, dispatch);
 }
-//LibraryComponent.contextTypes = { router: routerShape.isRequired }
 export default connect(mapStateToProps, mapDispatchToProps)(LibraryComponent);

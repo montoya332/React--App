@@ -21,17 +21,19 @@ const history = createHistory()
 export const PublicRoutes = ({store}) => {
 
 	return (
-			<Switch>
-				<Route path="/login" component={LoginContainer}/>
-				<Redirect to={{  pathname: '/login' }}/> 
-			</Switch>
+			<App>
+				<Switch>
+					<Route exact path="/library" component={LibraryContainer}/>
+					<Route path="/login" component={LoginContainer}/>
+					<Redirect to={{  pathname: '/login' }}/> 
+				</Switch>
+			</App>
 	)
 }
 export const PrivateRoutes = (props) => {
 	return (
 		<App>
 			<Switch>
-				<Route exact path="/library" component={LibraryContainer}/>
 				<Route exact path="/messages" component={ChatApp}/>
 				<Route component={ ErrorPage404 }/>
 			</Switch>

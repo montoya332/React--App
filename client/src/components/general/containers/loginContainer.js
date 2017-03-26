@@ -18,17 +18,29 @@ export class LoginContainer extends Component {
 	}
 
 	onSubmit(e){
-		const email = 'montoya332@live.com'
-		const password = 'test123'
+		e.preventDefault();
+		const email = this.textEmail.value || 'montoya332@live.com'
+		const password = this.textPassword.value || 'test123'
 		this.props.signin && this.props.signin({email,password})
 	}
 	render() {
 		return (
+			<div className="form__signin__container">
 				<Row className="display">
-					<Column small={6} large={6}> 
-						<button className="button" onClick={this.onSubmit}>Log in</button>
+					<Column small={12} large={3}/>
+					<Column small={12} large={6}>
+						<form className="form__signin" onSubmit={this.onSubmit}>
+							<div className="form__signin__group">
+								<input className="form-control" placeholder="Email" type="text" name="user[email]" ref={(input) => { this.textEmail = input; }}/>
+							</div>
+							<div className="form__signin__group">
+								<input className="form-control" placeholder="Password" type="password" name="user[password]" ref={(input) => { this.textPassword = input; }}/>
+							</div>
+							<button type="submit" className="button expanded">Log in</button>
+						</form>
 					</Column>
 				</Row>
+			</div>
 			)
 	}
 }

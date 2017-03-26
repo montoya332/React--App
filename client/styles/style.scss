@@ -1,15 +1,25 @@
-@import "404page";
-@import "autoSuggest";
 @import "../node_modules/foundation-sites/scss/foundation";
 
 @include foundation-flex-grid;
 @include foundation-flex-classes;
 @include foundation-everything;
+@include foundation-everything;
 
+@import "404page";
+@import "autoSuggest";
+@import "signin";
 body {
     margin: 0px;
 }
 
 .top-spacer{
     margin-top: 10px;
+}
+/* global */
+$app-colors: (
+  white: white,
+) !default;
+
+@each $name, $color in $app-colors {
+  .text-color-#{$name} { color:$color !important; }
 }

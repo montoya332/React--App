@@ -11,6 +11,7 @@ class AutoSuggestComponent extends Component {
 			dataSource: []
 		};
 		this.onUpdateInput = _.throttle(this.onUpdateInput.bind(this), 1000);
+		this.onNewRequest = this.onNewRequest.bind(this)
 	}
 	onUpdateInput(searchText){
 		let dataSource = []

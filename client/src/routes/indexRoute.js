@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
 import {
 	browserHistory,
 	BrowserRouter as Router,
@@ -10,12 +10,12 @@ import {
 	withRouter
 } from 'react-router-dom'
 import { Switch } from 'react-router'
-import App from '../components/app';
-import {LibraryContainer} from '../components/library/index';
-import ErrorPage404 from '../components/general/404error';
+import App from '../components/app'
+import {LibraryContainer} from '../components/library/index'
+import ErrorPage404 from '../components/general/404error'
 import ChatApp from '../components/messages/container/chatContainer'
-import { app } from 'utils/socketio';
-import LoginContainer from '../components/general/containers/loginContainer';
+import { app } from 'utils/socketio'
+import {LoginContainer, UserProfileContainer} from 'components/userProfile'
 import createHistory from 'history/createBrowserHistory'
 const history = createHistory()
 export const PublicRoutes = ({store}) => {
@@ -23,6 +23,7 @@ export const PublicRoutes = ({store}) => {
 	return (
 			<App>
 				<Switch>
+					<Route exact path="/profile" component={UserProfileContainer}/>
 					<Route exact path="/library" component={LibraryContainer}/>
 					<Route path="/login" component={LoginContainer}/>
 					<Redirect to={{  pathname: '/login' }}/> 

@@ -8,6 +8,7 @@
 @import "404page";
 @import "autoSuggest";
 @import "signin";
+@import "userProfile";
 body {
     margin: 0px;
 }
@@ -22,4 +23,19 @@ $app-colors: (
 
 @each $name, $color in $app-colors {
   .text-color-#{$name} { color:$color !important; }
+}
+
+@for $i from 1 through 10 {
+	.top_spacer#{$i * 10} {
+		margin-top: $i * 10 + px;
+	}
+	.bottom_spacer#{$i * 10} {
+		margin-bottom: $i * 10 + px;
+	}
+	.top_padding#{$i * 10} {
+		padding-top: $i * 10 + px;
+	}
+	.bottom_padding#{$i * 10} {
+		padding-bottom: $i * 10 + px;
+	}
 }

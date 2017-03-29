@@ -12,13 +12,14 @@ export const app = feathers()
   .configure(authentication({ storage: window.localStorage }));
 
 
-
-
-
 // A placeholder image if the user does not have one
-window.PLACEHOLDER = 'https://placeimg.com/60/60/people';
+export const PLACEHOLDER = 'https://placeimg.com/60/60/people';
 // An anonymous user if the message does not have that information
-window.dummyUser = {
+export const dummyUser = {
   avatar: PLACEHOLDER,
   email: 'Anonymous'
 };
+
+window.PLACEHOLDER = PLACEHOLDER
+// An anonymous user if the message does not have that information
+window.dummyUser = dummyUser;

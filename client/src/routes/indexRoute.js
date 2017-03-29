@@ -42,7 +42,8 @@ export const PrivateRoutes = (props) => {
 	)
 }
 export const AuthPrivateRoutes = withRouter(({ history,store,...rest }) => {
-  return store.getState().clientUser.get('token') ? (
+	//store.getState().clientUser.get('token')
+  return localStorage.getItem('feathers-jwt') ? (
     <PrivateRoutes {...rest} />
   ) : (
     <PublicRoutes {...rest} />

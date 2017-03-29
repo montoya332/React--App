@@ -3,6 +3,8 @@ import UserList from '../smart/UserList'
 import MessageList from '../dumb/messageList'
 import ComposeMessage from '../smart/messages'
 import { Row, Column } from 'react-foundation';
+import { app } from 'utils/socketio';
+
 export class ChatApp extends Component {
 	constructor(props) {
 		super(props);

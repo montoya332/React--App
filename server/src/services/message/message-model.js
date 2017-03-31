@@ -8,16 +8,21 @@
 const Sequelize = require('sequelize');
 
 module.exports = function(sequelize) {
-  const message = sequelize.define('messages', {
-    text: {
-      type: Sequelize.STRING,
-      allowNull: false
-    }
-  }, {
-    freezeTableName: true
-  });
+	const Message = sequelize.define('messages', {
+		text: {
+			type: Sequelize.STRING,
+			allowNull: false
+		}
+	}, {
+		freezeTableName: true,
+		classMethods: {
+			associate() {
+				Message.belongsTo(sequelize.models.users, { foreignKey: 'sentBy' });
+			}
+		}
+	});
 
-  message.sync();
+	// message.sync();
 
-  return message;
+	return Message;
 };

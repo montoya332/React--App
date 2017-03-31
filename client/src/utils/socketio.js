@@ -19,7 +19,7 @@ export const dummyUser = {
   avatar: PLACEHOLDER,
   email: 'Anonymous'
 };
-
+window.app = app
 window.PLACEHOLDER = PLACEHOLDER
 // An anonymous user if the message does not have that information
 window.dummyUser = dummyUser;

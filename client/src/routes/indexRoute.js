@@ -35,6 +35,7 @@ export const PrivateRoutes = (props) => {
 	return (
 		<App>
 			<Switch>
+				<Route path="/login" component={LoginContainer}/>
 				<Route exact path="/messages" component={ChatApp}/>
 				<Route component={ ErrorPage404 }/>
 			</Switch>

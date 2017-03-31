@@ -9,19 +9,15 @@ const Sequelize = require('sequelize');
 
 module.exports = function(sequelize) {
 	const User = sequelize.define('users', {
-		facebookId: {
+		first_name: {
 			type: Sequelize.STRING,
 			allowNull: true
 		},
-		githubId: {
+		last_name: {
 			type: Sequelize.STRING,
 			allowNull: true
 		},
 		googleId: {
-			type: Sequelize.STRING,
-			allowNull: true
-		},
-		linkedinId: {
 			type: Sequelize.STRING,
 			allowNull: true
 		},

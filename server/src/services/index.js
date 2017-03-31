@@ -1,8 +1,10 @@
 'use strict';
+const upload = require('./upload');
 const message = require('./message');
 const authentication = require('./authentication');
 const user = require('./user');
 const Sequelize = require('sequelize');
+
 module.exports = function() {
 	const app = this;
 
@@ -15,7 +17,8 @@ module.exports = function() {
 	app.configure(authentication);
 	app.configure(user);
 	app.configure(message);
-
+	app.configure(upload);
+	
 	// Associate all of our models
 	Object.keys(sequelize.models)
 		.map(name => sequelize.models[name])

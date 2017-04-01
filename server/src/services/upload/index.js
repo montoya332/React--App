@@ -1,5 +1,6 @@
 'use strict';
 const hooks = require('./hooks');
+const upload = require('./upload-model');
 const path = require('path');
 const serverBase = path.join(__dirname, '../../..');
 
@@ -31,7 +32,10 @@ module.exports = function() {
 		},
 		blobService({
 			Model: blobStorage
-		})
+		}),
+		function(req, res, next) {
+			next();
+		},
 	);
 
 	// Get our initialize service to that we can bind hooks

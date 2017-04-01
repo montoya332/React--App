@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
+import Dropzone from 'react-dropzone'
 export default class DialogExampleSimple extends Component {
 
+	onDrop = (acceptedFiles, rejectedFiles) => {
+		console.log('Accepted files: ', acceptedFiles);
+		console.log('Rejected files: ', rejectedFiles);
+	}
 	render() {
 		const actions = [
 			<FlatButton
@@ -28,7 +33,9 @@ export default class DialogExampleSimple extends Component {
 					open={this.props.open}
 					onRequestClose={this.props.onRequestClose}
 				>
-				The actions in this window were passed in as an array of React objects.
+					<Dropzone onDrop={this.onDrop}>
+						<div>Try dropping some files here, or click to select files to upload.</div>
+					</Dropzone>
 				</Dialog>
 			</div>
 		);

@@ -17,7 +17,7 @@ module.exports = function(sequelize) {
 		freezeTableName: true,
 		classMethods: {
 			associate() {
-				Message.belongsTo(sequelize.models.users, { foreignKey: 'sentBy' });
+				Message.belongsTo(sequelize.models.users, { foreignKey: 'createdBy' });
 			}
 		}
 	});

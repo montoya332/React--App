@@ -1,7 +1,7 @@
 'use strict';
 const hooks = require('./hooks');
 const path = require('path');
-
+const serverBase = path.join(__dirname, '../../..');
 
 const multer = require('multer');
 const multipartMiddleware = multer();
@@ -10,7 +10,6 @@ const dauria = require('dauria');
 // feathers-blob service
 const blobService = require('feathers-blob');
 const fs = require('fs-blob-store');
-const serverBase = path.join(__dirname, '../../..');
 const blobStorage = fs(serverBase + '/uploads');
 
 module.exports = function() {
@@ -34,8 +33,6 @@ module.exports = function() {
 			Model: blobStorage
 		})
 	);
-
-
 
 	// Get our initialize service to that we can bind hooks
 	const uploadService = app.service('/uploads');

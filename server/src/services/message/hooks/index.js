@@ -7,9 +7,9 @@ const hooks = require('feathers-hooks');
 
 const process = require('./process');
 const globalHooks = require('../../../hooks');
-const populateSender = hooks.populate('sentBy', {
+const populateSender = hooks.populate('createdBy', {
 	service: 'users',
-	field: 'sentBy'
+	field: 'createdBy'
 });
 
 exports.before = {
@@ -21,8 +21,8 @@ exports.before = {
 	find: [],
 	get: [],
 	create: [process()],
-	update: [hooks.remove('sentBy'), restrictToSender()],
-	patch: [hooks.remove('sentBy'), restrictToSender()],
+	update: [hooks.remove('createdBy'), restrictToSender()],
+	patch: [hooks.remove('createdBy'), restrictToSender()],
 	remove: [restrictToSender()]
 };
 

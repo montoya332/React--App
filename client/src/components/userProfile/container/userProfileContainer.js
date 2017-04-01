@@ -6,20 +6,32 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import FontIcon from 'material-ui/FontIcon';
 import SvgIcon from 'material-ui/SvgIcon';
 import {blue500, red500, greenA200} from 'material-ui/styles/colors';
-
+import {UpdateProfileImage} from '../smart'
 export class LoginContainer extends Component {
 	constructor(props) {
 		super(props);
-		// this.state = {}
+		this.state = {
+			updateProfileImage: false
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
+	}
+	handleOpen = (e) => {
+		this.setState({
+			updateProfileImage: true
+		});
+	}
+	handleClose = (e) => {
+		this.setState({
+			updateProfileImage: false
+		});
 	}
 	renderUserImage(){
 		if(false){
 			return <img className="card__photo--preview" src="http://placehold.it/350x150" />
 		}
-		return <span className="card__photo--edit" >A</span>
+		return <span className="card__photo--edit" onClick={this.handleOpen}>A</span>
 	}
 	render() {
 		return (
@@ -48,7 +60,7 @@ export class LoginContainer extends Component {
 					</Row>
 					</div>
 				</div>
-				
+				<UpdateProfileImage open={this.state.updateProfileImage} onRequestClose={this.handleClose}/>
 			</div>
 			)
 	}

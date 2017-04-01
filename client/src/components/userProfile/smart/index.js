@@ -1,0 +1,1 @@
+export UpdateProfileImage from './updateProfileImage'

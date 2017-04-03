@@ -10,7 +10,7 @@
 				"constants": "./src/constants/",
 				"stores": "./src/reducers/",
 				"routes": "./src/routes/",
-				"styles": "./src/styles/",
+				"stylesheets": "./src/stylesheets/",
 				"utils": "./src/utils/"
 			}
 		}]

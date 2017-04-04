@@ -1,6 +1,6 @@
 'use strict';
 
-// message-model.js - A sequelize model
+// upload-model.js - A sequelize model
 // 
 // See http://docs.sequelizejs.com/en/latest/docs/models-definition/
 // for more of what you can do here.
@@ -8,8 +8,8 @@
 const Sequelize = require('sequelize');
 
 module.exports = function(sequelize) {
-	const Message = sequelize.define('messages', {
-		text: {
+	const Upload = sequelize.define('Upload', {
+		uri: {
 			type: Sequelize.STRING,
 			allowNull: false
 		}
@@ -17,12 +17,12 @@ module.exports = function(sequelize) {
 		freezeTableName: true,
 		classMethods: {
 			associate() {
-				Message.belongsTo(sequelize.models.users, { foreignKey: 'createdBy' });
+				Upload.belongsTo(sequelize.models.users, { foreignKey: 'createdBy' });
 			}
 		}
 	});
 
-	// message.sync();
+	// Upload.sync();
 
-	return Message;
+	return Upload;
 };

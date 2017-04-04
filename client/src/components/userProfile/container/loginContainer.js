@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Column } from 'react-foundation';
 import * as ClientUserActions from 'actionCreator/general/clientUser'
+//TODO: Use http://www.material-ui.com/#/components/divider with Textfield 
 export class LoginContainer extends Component {
 	constructor(props) {
 		super(props);

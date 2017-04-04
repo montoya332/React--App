@@ -7,6 +7,9 @@ import FontIcon from 'material-ui/FontIcon';
 import SvgIcon from 'material-ui/SvgIcon';
 import {blue500, red500, greenA200} from 'material-ui/styles/colors';
 import {UpdateProfileImage} from '../smart'
+import IconButton from 'material-ui/IconButton';
+import ModeEditIcon from 'material-ui/svg-icons/editor/mode-edit';
+
 export class LoginContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -14,7 +17,6 @@ export class LoginContainer extends Component {
 			updateProfileImage: false
 		}
 	}
-
 	componentWillReceiveProps(nextProps) {
 	}
 	handleOpen = (e) => {
@@ -33,6 +35,13 @@ export class LoginContainer extends Component {
 		}
 		return <span className="card__photo--edit" onClick={this.handleOpen}>A</span>
 	}
+	renderMenuIcons(){
+		return (
+			<div className="float-right">
+				<IconButton><ModeEditIcon /></IconButton>
+			</div>
+			)
+	}
 	render() {
 		return (
 			<div className="user_profile__container bg-img">
@@ -43,9 +52,7 @@ export class LoginContainer extends Component {
 						<Column small={12} large={6}>
 							<Card className="top_spacer100">
 								<CardText>
-									<button className="float-right" aria-label="Close alert" type="button">
-										Edit
-									</button>
+									{this.renderMenuIcons()}
 									<div className="card__header">
 										<div className="card__photo_wrapper">
 											{this.renderUserImage()}

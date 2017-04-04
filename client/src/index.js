@@ -12,7 +12,7 @@ import {
 	BrowserRouter as Router
 } from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
-import '../styles/style.scss';
+import '../stylesheets/main.scss';
 import { app } from 'utils/socketio';
 
 const history = createBrowserHistory()
@@ -27,16 +27,20 @@ const createStoreWithMiddleware = compose(applyMiddleware(
 	),typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
 		? window.devToolsExtension()
 	: f => f)(createStore)
-window.app = app
 
 const store = createStoreWithMiddleware(reducers)
 
-ReactDOM.render(
-	<MuiThemeProvider>
-		<Provider store={store}>
-			{AppRoutes(store)}
-		</Provider>
-	</MuiThemeProvider>
-, document.querySelector('#App'));
+app.authenticate().then(renderApp,renderApp)
+
+function renderApp(){
+	ReactDOM.render(
+		<MuiThemeProvider>
+			<Provider store={store}>
+				{AppRoutes(store)}
+			</Provider>
+		</MuiThemeProvider>
+	, document.querySelector('#App'));
+}
+
 
 

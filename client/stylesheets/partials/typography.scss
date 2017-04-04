@@ -1,0 +1,8 @@
+/* global */
+$app-colors: (
+  white: white,
+) !default;
+
+@each $name, $color in $app-colors {
+  .text-color-#{$name} { color:$color !important; }
+}

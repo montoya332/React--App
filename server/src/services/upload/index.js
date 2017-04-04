@@ -32,10 +32,7 @@ module.exports = function() {
 		},
 		blobService({
 			Model: blobStorage
-		}),
-		function(req, res, next) {
-			next();
-		},
+		})
 	);
 
 	// Get our initialize service to that we can bind hooks

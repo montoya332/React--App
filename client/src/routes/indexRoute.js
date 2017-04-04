@@ -36,6 +36,7 @@ export const PrivateRoutes = (props) => {
 		<App>
 			<Switch>
 				<Route  path="/profile" component={UserProfileContainer}/>
+				<Route exact path="/library" component={LibraryContainer}/>
 				<Route path="/login" component={LoginContainer}/>
 				<Route exact path="/messages" component={ChatApp}/>
 				<Route component={ ErrorPage404 }/>

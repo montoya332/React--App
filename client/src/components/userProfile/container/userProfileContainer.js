@@ -6,7 +6,7 @@ import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'mat
 import FontIcon from 'material-ui/FontIcon';
 import SvgIcon from 'material-ui/SvgIcon';
 import {blue500, red500, greenA200} from 'material-ui/styles/colors';
-import {UpdateProfileImage} from '../smart'
+import {UpdateProfileImage, EditProfileInfo} from '../smart'
 import IconButton from 'material-ui/IconButton';
 import ModeEditIcon from 'material-ui/svg-icons/editor/mode-edit';
 
@@ -14,7 +14,8 @@ export class LoginContainer extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			updateProfileImage: false
+			updateProfileImage: false,
+			editProfileModal: false
 		}
 	}
 	componentWillReceiveProps(nextProps) {
@@ -24,8 +25,14 @@ export class LoginContainer extends Component {
 			updateProfileImage: true
 		});
 	}
+	handleOpenEdit = (e) => {
+		this.setState({
+			editProfileModal: true
+		});
+	}
 	handleClose = (e) => {
 		this.setState({
+			editProfileModal: false,
 			updateProfileImage: false
 		});
 	}
@@ -38,7 +45,7 @@ export class LoginContainer extends Component {
 	renderMenuIcons(){
 		return (
 			<div className="float-right">
-				<IconButton><ModeEditIcon /></IconButton>
+				<IconButton><ModeEditIcon onClick={this.handleOpenEdit}/></IconButton>
 			</div>
 			)
 	}
@@ -68,6 +75,7 @@ export class LoginContainer extends Component {
 					</div>
 				</div>
 				<UpdateProfileImage open={this.state.updateProfileImage} onRequestClose={this.handleClose}/>
+				<EditProfileInfo open={this.state.editProfileModal} onRequestClose={this.handleClose}/>
 			</div>
 			)
 	}

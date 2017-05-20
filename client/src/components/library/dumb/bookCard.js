@@ -20,5 +20,5 @@ export default (props) => {
 			  {props.description}
 			</CardText>
 		</Card>
-		)
+		);
 }

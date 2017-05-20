@@ -1,5 +1,6 @@
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 import * as LibraryActions from 'actionCreator/library/actions';
+import * as consts from 'constants/library/libraryConstants';
 import React, { Component, PropTypes } from 'react';
 // import { getLocationQuery } from 'utils/utils';
 import { connect } from 'react-redux';
@@ -39,8 +40,8 @@ export class LibraryComponent extends Component {
 		}
 	}
 	renderBook() {
-		const active = this.props.book.get('active');
-		const loading = this.props.book.get('loading');
+		const active = this.props.book.get(consts.active);
+		const loading = this.props.book.get(consts.loading);
 		const loadingContainer = {
 			position: 'relative',
 		};

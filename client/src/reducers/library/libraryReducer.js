@@ -1,9 +1,11 @@
 import * as ACTIONTYPES from 'constants/library/actionTypes';
+import * as consts from 'constants/library/libraryConstants';
+
 import { fromJS } from 'immutable';
 
 export const INITIAL_STATE = {
-	loading: false,
-	active: null
+	[consts.loading]: false,
+	[consts.active]: null
 };
 export default function (state = fromJS(INITIAL_STATE), action) {
 	const { payload = {}, params = {} } = action;
@@ -20,12 +22,12 @@ export default function (state = fromJS(INITIAL_STATE), action) {
 };
 
 export function loading(state, bool = true) {
-	return state.set('loading', bool);
+	return state.set(consts.loading, bool);
 }
 
 export function setBook(state, data = {}, params = {}) {
 	if (data.volumeInfo) {
-		return state.set('active', data.volumeInfo);
+		return state.set(consts.active, data.volumeInfo);
 	}
 	return state;
 }

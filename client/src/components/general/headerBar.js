@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import {List, ListItem} from 'material-ui/List';
-import {list}  from 'ReactApp/stubData/tabData';
+import {list} from 'ReactApp/stubData/tabData';
 
 export default class Navigation extends Component {
 	constructor(props) {
@@ -12,21 +11,43 @@ export default class Navigation extends Component {
 	}
 	handleToggle = () => this.setState({open: !this.state.open});
 	handleClose = () => this.setState({open: false});
-	
-	renderListItem = (item, index, list) => {
+
+	renderListItem = (item, index) => {
 		if (item.children) {
-			return (<ListItem key={index} value={1} primaryText={item.title} primaryTogglesNestedList nestedItems={item.children.map(this.renderListItem)}/>);
+			return (
+				<ListItem
+					key={index}
+					value={1}
+					primaryText={item.title}
+					primaryTogglesNestedList
+					nestedItems={item.children.map(this.renderListItem)}
+				/>
+			);
 		}
-		return <ListItem key={index} value={2} primaryText={item.title} onTouchTap={this.handleClose} />;
+		return (
+			<ListItem
+				key={index}
+				value={2}
+				primaryText={item.title}
+				onTouchTap={this.handleClose}
+		/>
+		);
 	}
 	render() {
 
 		return (
 			<div>
-				<AppBar title="Health App" iconClassNameRight="muidocs-icon-navigation-expand-more" onLeftIconButtonTouchTap={this.handleToggle}/>
-				<Drawer docked={false} width={225} open={this.state.open} onRequestChange={open => this.setState({open})} >
-					 <List defaultValue={1}>
-						{ list.map(this.renderListItem)}
+				<AppBar
+					title="React App"
+					iconClassNameRight="muidocs-icon-navigation-expand-more"
+					onLeftIconButtonTouchTap={this.handleToggle} />
+				<Drawer
+					docked={false}
+					width={225}
+					open={this.state.open}
+					onRequestChange={open => this.setState({open})} >
+					<List defaultValue={1}>
+						{ list.map(this.renderListItem) }
 					</List>
 				</Drawer>
 			</div>

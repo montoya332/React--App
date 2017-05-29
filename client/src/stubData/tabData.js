@@ -1,43 +1,28 @@
 export const list = [{
 	id: '',
-	title: 'Ingredients',
+	title: 'Home',
 	href: ''
 }, {
 	id: '',
-	title: 'Vitamins',
-	href: ''
-}, {
-	id: '',
-	title: 'Minerals',
+	title: 'Store',
 	href: '',
 	children: [{
 		id: '',
-		title: 'Sodium',
-		href: ''
-	}, {
-		id: '',
-		title: 'Chloride',
+		title: 'Item',
 		href: ''
 	}]
 }, {
 	id: '',
-	title: 'Amino acids',
-	href: '',
-	desc: 'An essential amino acid is an amino acid that cannot be synthesized de novo (from scratch) by an organism, and therefore must be supplied in its diet. Out of the twenty amino acids, nine cannot be endogenously synthesized by humans: phenylalanine, valine, threonine, tryptophan, methionine, leucine, isoleucine, lysine, and histidine.'
-}, {
-	id: '',
-	title: 'Fatty acids',
+	title: 'My Account',
+	icon: '',
 	href: ''
 }, {
 	id: '',
-	title: 'Minerals',
+	title: 'Settings',
+	icon: '',
 	href: ''
 }, {
 	id: '',
-	title: 'Special Conditions',
-	href: ''
-}, {
-	id: '',
-	title: 'Remedy',
+	title: 'Help & Feedback',
 	href: ''
 }];

@@ -55,10 +55,10 @@ export class LoginContainer extends Component {
 					<Column small={12} large={6}>
 						<form className="form__signin" onSubmit={this.onSubmit}>
 							<div className="form__signin__group">
-								<input className="form-control" placeholder="Email" type="text" name="user[email]" ref={(input) => { this.textEmail = input; }}/>
+								<input className="form-control" placeholder="Email" type="text" name="user[email]" ref={(input) => { this.textEmail = input; }} />
 							</div>
 							<div className="form__signin__group">
-								<input className="form-control" placeholder="Password" type="password" name="user[password]" ref={(input) => { this.textPassword = input; }}/>
+								<input className="form-control" placeholder="Password" type="password" name="user[password]" ref={(input) => { this.textPassword = input; }} />
 							</div>
 							<button type="submit" className="button expanded">{btnText}</button>
 							<br />
@@ -69,14 +69,13 @@ export class LoginContainer extends Component {
 							</div>
 						</form>
 					</Column>
-					<Column small={12} large={3}/>
-
+					<Column small={12} large={3} />
 				</Row>
 			</div>
 		);
 	}
 }
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
 	const clientUser = state.clientUser.toJS();
 	return { clientUser };
 }

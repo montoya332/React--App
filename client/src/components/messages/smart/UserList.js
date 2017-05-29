@@ -17,20 +17,22 @@ export default (props) => {
 		</h4>
 			</header>
 			<List>
-				{users.map((user, index, list) =>
-					<ListItem
-						key={index}
-						disabled
-						leftAvatar={<Avatar src={user.avatar || PLACEHOLDER} />} >
-						{user.email}
-					</ListItem>
+				{users.map((user, index) =>
+					(
+						<ListItem
+							key={index}
+							disabled
+							leftAvatar={<Avatar src={user.avatar || PLACEHOLDER} />} >
+							{user.email}
+						</ListItem>
+					)
 	   )}
 
 			</List>
 			<footer className="flex flex-row flex-center">
-				<a href="#" className="logout button button-primary" onClick={logout}>
-		  Sign Out
-		</a>
+				<a href="#" className="logout button button-primary" onClick={logout} >
+					Sign Out
+				</a>
 			</footer>
 		</aside>
 	);

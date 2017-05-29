@@ -55,7 +55,7 @@ export class LoginContainer extends Component {
 				<div className="bg-img">
 					<div className="bg-img__visible-content bg-img__show-default">
 						<Row className="" style={{maxWidth: '110rem'}}>
-							<Column small={12} large={3}/>
+							<Column small={12} large={3} />
 							<Column small={12} large={6}>
 								<Card className="top_spacer100">
 									<CardText>
@@ -70,7 +70,7 @@ export class LoginContainer extends Component {
 								</Card>
 								<Card className="top_spacer10"><CardText>About</CardText></Card>
 							</Column>
-							<Column small={12} large={3}/>
+							<Column small={12} large={3} />
 						</Row>
 					</div>
 				</div>
@@ -80,7 +80,7 @@ export class LoginContainer extends Component {
 		);
 	}
 }
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
 	const clientUser = state.clientUser.toJS();
 	return { clientUser };
 }

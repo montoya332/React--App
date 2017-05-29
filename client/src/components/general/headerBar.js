@@ -30,7 +30,7 @@ export default class Navigation extends Component {
 				value={2}
 				primaryText={item.title}
 				onTouchTap={this.handleClose}
-		/>
+			/>
 		);
 	}
 	render() {

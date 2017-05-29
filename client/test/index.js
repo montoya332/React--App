@@ -13,7 +13,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import ReduxPromise from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
-import configureStore from 'redux-mock-store'
+import configureStore from 'redux-mock-store';
 
 /* Set up testing environment */
 global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
@@ -36,16 +36,16 @@ function renderComponent(ComponentClass, props, state) {
 	return $(ReactDOM.findDOMNode(componentInstance)); // produces HTML
 }
 /* mockStore */
-	export const middleware = [ReduxThunk, ReduxPromise];
-	export const mockStore = configureStore(middleware)
+export const middleware = [ReduxThunk, ReduxPromise];
+export const mockStore = configureStore(middleware);
 
 /* simulating events */
-$.fn.simulate = function(eventName, value) {
+$.fn.simulate = function (eventName, value) {
 	if (value) {
 		this.val(value);
 	}
 	TestUtils.Simulate[eventName](this[0]);
-}
+};
 /* Set up chai-jquery */
 
 chaiJquery(chai, chai.util, $);

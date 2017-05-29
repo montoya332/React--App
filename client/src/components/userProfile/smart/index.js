@@ -1,2 +1,2 @@
-export UpdateProfileImage from './updateProfileImage'
-export EditProfileInfo from './editProfileInfo'
+export UpdateProfileImage from './updateProfileImage';
+export EditProfileInfo from './editProfileInfo';

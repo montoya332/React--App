@@ -21,10 +21,8 @@ const history = createHistory();
 
 
 export const SmallProjectRoutes = ({store}) => (
-	<App>
-	</App>
+	<App />
 	);
-
 
 
 export const PublicRoutes = ({store}) => (

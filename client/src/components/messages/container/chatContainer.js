@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import UserList from '../smart/UserList'
-import MessageList from '../dumb/messageList'
-import ComposeMessage from '../smart/messages'
+import UserList from '../smart/UserList';
+import MessageList from '../dumb/messageList';
+import ComposeMessage from '../smart/messages';
 import { Row, Column } from 'react-foundation';
 import { app } from 'utils/socketio';
 
@@ -11,7 +11,7 @@ export class ChatApp extends Component {
 		this.state = {
 			users: [],
 			messages: []
-		}
+		};
 	}
 
 	componentDidUpdate() {
@@ -52,16 +52,16 @@ export class ChatApp extends Component {
 
 	render() {
 		return (
-				<Row className="display">
-					<Column small={6} large={6}><UserList users={this.state.users} /></Column>
-					<Column small={6} large={6}>
-						<div className="flex flex-column col col-9">
-							<MessageList users={this.state.users} messages={this.state.messages} />
-							<ComposeMessage />
-						</div>
-					</Column>
-				</Row>
-			)
+			<Row className="display">
+				<Column small={6} large={6}><UserList users={this.state.users} /></Column>
+				<Column small={6} large={6}>
+					<div className="flex flex-column col col-9">
+						<MessageList users={this.state.users} messages={this.state.messages} />
+						<ComposeMessage />
+					</div>
+				</Column>
+			</Row>
+		);
 	}
 }
 

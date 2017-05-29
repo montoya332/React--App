@@ -7,7 +7,7 @@
     "dist": "npm run clean && npm run copy && webpack --progress --bail --env dist -p",
     "build": "webpack -p --progress",
     "lint": "eslint ./src; exit 0",
-    "serve:dev": "webpack-dev-server --open --env dev",
+    "serve:dev": "webpack-dev-server --env dev",
     "serve:dist": "webpack-dev-server --open --env dist -p --progress",
     "test": "mocha --compilers js:babel-core/register --require ignore-styles ./test/index.js 'test/**/*.spec.@(js|jsx)'",
     "karma": "NODE_ENV=test karma start; exit 0",

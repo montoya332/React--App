@@ -30,9 +30,9 @@ const createStoreWithMiddleware = compose(applyMiddleware(
 
 const store = createStoreWithMiddleware(reducers)
 
-app.authenticate().then(renderApp,renderApp)
+// app.authenticate().then(renderApp,renderApp)
 
-function renderApp(){
+// function renderApp(){
 	ReactDOM.render(
 		<MuiThemeProvider>
 			<Provider store={store}>
@@ -40,7 +40,7 @@ function renderApp(){
 			</Provider>
 		</MuiThemeProvider>
 	, document.querySelector('#App'));
-}
+// }
 
 
 

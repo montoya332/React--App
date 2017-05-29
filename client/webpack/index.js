@@ -4,8 +4,8 @@ const dist = require('./dist');
 const test = require('./test');
 
 module.exports = {
-  common,
-  dev,
-  dist,
-  test
+	common,
+	dev,
+	dist,
+	test
 };

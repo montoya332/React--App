@@ -1,25 +1,54 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
+import {List, ListItem} from 'material-ui/List';
+import {list} from 'ReactApp/stubData/tabData';
 
 export default class Navigation extends Component {
 	constructor(props) {
-    	super(props);
-    	this.state = {open: false};
-  	}
-  	handleToggle = () => this.setState({open: !this.state.open});
-  	handleClose = () => this.setState({open: false});
+		super(props);
+		this.state = {open: false};
+	}
+	handleToggle = () => this.setState({open: !this.state.open});
+	handleClose = () => this.setState({open: false});
+
+	renderListItem = (item, index) => {
+		if (item.children) {
+			return (
+				<ListItem
+					key={index}
+					value={1}
+					primaryText={item.title}
+					primaryTogglesNestedList
+					nestedItems={item.children.map(this.renderListItem)}
+				/>
+			);
+		}
+		return (
+			<ListItem
+				key={index}
+				value={2}
+				primaryText={item.title}
+				onTouchTap={this.handleClose}
+			/>
+		);
+	}
 	render() {
+
 		return (
 			<div>
-				<AppBar title="Title" iconClassNameRight="muidocs-icon-navigation-expand-more" onLeftIconButtonTouchTap={this.handleToggle}/>
-				<Drawer docked={false} width={200} open={this.state.open}
-						onRequestChange={(open) => this.setState({open})}
-					>
-					<MenuItem onTouchTap={this.handleClose}>Menu Item</MenuItem>
-					<MenuItem onTouchTap={this.handleClose}>Menu Item 2</MenuItem>
+				<AppBar
+					title="React App"
+					iconClassNameRight="muidocs-icon-navigation-expand-more"
+					onLeftIconButtonTouchTap={this.handleToggle} />
+				<Drawer
+					docked={false}
+					width={225}
+					open={this.state.open}
+					onRequestChange={open => this.setState({open})} >
+					<List defaultValue={1}>
+						{ list.map(this.renderListItem) }
+					</List>
 				</Drawer>
 			</div>
 		);

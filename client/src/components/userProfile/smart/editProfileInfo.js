@@ -11,13 +11,13 @@ export default class EditProfileInfo extends Component {
 		const actions = [
 			<FlatButton
 				label="Cancel"
-				primary={true}
+				primary
 				onTouchTap={this.props.onRequestClose}
 			/>,
 			<FlatButton
 				label="Submit"
-				primary={true}
-				keyboardFocused={true}
+				primary
+				keyboardFocused
 				onTouchTap={this.props.onRequestClose}
 			/>,
 		];
@@ -30,15 +30,15 @@ export default class EditProfileInfo extends Component {
 					open={this.props.open}
 					onRequestClose={this.props.onRequestClose}
 				>
-				<div>
-					<TextField floatingLabelText="First Name" />
-					<br />
-					<br />
-					<TextField floatingLabelText="Last Name" />
-					<br />
-				</div>
+					<div>
+						<TextField floatingLabelText="First Name" />
+						<br />
+						<br />
+						<TextField floatingLabelText="Last Name" />
+						<br />
+					</div>
 				</Dialog>
 			</div>
 		);
-}
+	}
 }

@@ -7,40 +7,37 @@ import ReduxPromise from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import reducers from './reducers/rootReducer';
-import routes,{AppRoutes} from './routes/indexRoute';
+import routes, {AppRoutes} from './routes/indexRoute';
 import {
 	BrowserRouter as Router
-} from 'react-router-dom'
-import createBrowserHistory from 'history/createBrowserHistory'
+} from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
 import '../stylesheets/main.scss';
 import { app } from 'utils/socketio';
 
-const history = createBrowserHistory()
+const history = createBrowserHistory();
 
 injectTapEventPlugin();
-
 
 
 const middleware = [ReduxThunk, ReduxPromise];
 const createStoreWithMiddleware = compose(applyMiddleware(
 		...middleware
-	),typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
+	), typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
 		? window.devToolsExtension()
-	: f => f)(createStore)
+	: f => f)(createStore);
 
-const store = createStoreWithMiddleware(reducers)
+const store = createStoreWithMiddleware(reducers);
 
-app.authenticate().then(renderApp,renderApp)
+// app.authenticate().then(renderApp,renderApp)
 
-function renderApp(){
-	ReactDOM.render(
-		<MuiThemeProvider>
-			<Provider store={store}>
-				{AppRoutes(store)}
-			</Provider>
-		</MuiThemeProvider>
+// function renderApp(){
+ReactDOM.render(
+	<MuiThemeProvider>
+		<Provider store={store}>
+			{AppRoutes(store)}
+		</Provider>
+	</MuiThemeProvider>
 	, document.querySelector('#App'));
-}
-
-
+// }
 

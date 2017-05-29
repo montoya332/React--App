@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 export class ComposeMessage extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { text: '' }
-		this.sendMessage = this.sendMessage.bind(this)
-		this.updateText = this.updateText.bind(this)
+		this.state = { text: '' };
+		this.sendMessage = this.sendMessage.bind(this);
+		this.updateText = this.updateText.bind(this);
 
 	}
 	updateText(ev) {
@@ -26,11 +26,12 @@ export class ComposeMessage extends Component {
 	render() {
 		return (
 			<form className="flex flex-row flex-space-between" onSubmit={this.sendMessage}>
-				<input type="text" name="text" className="flex flex-1"
-				value={this.state.text} onChange={this.updateText} />
+				<input
+					type="text" name="text" className="flex flex-1"
+					value={this.state.text} onChange={this.updateText} />
 				<button className="button button-primary" type="submit">Send</button>
 			</form>
-		)
+		);
 	}
 }
 

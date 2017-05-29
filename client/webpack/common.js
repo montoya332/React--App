@@ -11,33 +11,33 @@ const npmBase = path.join(__dirname, '../node_modules');
 class WebpackBaseConfig {
 
 	constructor() {
-			this._config = {};
-		}
+		this._config = {};
+	}
 		/* Get the list of included packages */
 	get includedPackages() {
-			return [].map((pkg) => fs.realpathSync(path.join(npmBase, pkg)));
-		}
+		return [].map(pkg => fs.realpathSync(path.join(npmBase, pkg)));
+	}
 		/*  Set the config data */
 	set config(data) {
-			this._config = Object.assign({}, this.defaultSettings, data);
-			return this._config;
-		}
+		this._config = Object.assign({}, this.defaultSettings, data);
+		return this._config;
+	}
 		/*  Get the global config */
 	get config() {
-			return this._config;
-		}
+		return this._config;
+	}
 		/*  Get the environment name */
 	get env() {
-			return 'dev';
-		}
+		return 'dev';
+	}
 		/* Get the absolute path to src directory */
 	get srcPathAbsolute() {
-			return path.resolve('./src');
-		}
+		return path.resolve('./src');
+	}
 		/* Get the absolute path to tests directory */
 	get testPathAbsolute() {
-			return path.resolve('./test');
-		}
+		return path.resolve('./test');
+	}
 		/* Get the default settings */
 	get defaultSettings() {
 		const cssModulesQuery = {

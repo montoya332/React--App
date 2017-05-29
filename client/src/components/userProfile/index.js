@@ -1,2 +1,2 @@
-export LoginContainer from './container/loginContainer'
-export UserProfileContainer from './container/userProfileContainer'
+export LoginContainer from './container/loginContainer';
+export UserProfileContainer from './container/userProfileContainer';

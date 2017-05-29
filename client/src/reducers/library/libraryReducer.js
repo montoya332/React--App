@@ -12,14 +12,14 @@ export default function (state = fromJS(INITIAL_STATE), action) {
 	const { data = {} } = payload;
 	let newState = {};
 	switch (action.type) {
-		case ACTIONTYPES.SETBOOKLOADING:
-			return loading(state);
-		case ACTIONTYPES.SETBOOK:
-			newState = loading(state, false);
-			return setBook(newState, data, params);
+	case ACTIONTYPES.SETBOOKLOADING:
+		return loading(state);
+	case ACTIONTYPES.SETBOOK:
+		newState = loading(state, false);
+		return setBook(newState, data, params);
 	}
 	return state;
-};
+}
 
 export function loading(state, bool = true) {
 	return state.set(consts.loading, bool);

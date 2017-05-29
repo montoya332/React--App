@@ -2,51 +2,51 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Row, Column } from 'react-foundation';
-import * as ClientUserActions from 'actionCreator/general/clientUser'
-//TODO: Use http://www.material-ui.com/#/components/divider with Textfield 
+import * as ClientUserActions from 'actionCreator/general/clientUser';
+// TODO: Use http://www.material-ui.com/#/components/divider with Textfield
 export class LoginContainer extends Component {
 	constructor(props) {
 		super(props);
 		// this.state = {}
-		this.onSubmit = this.onSubmit.bind(this)
+		this.onSubmit = this.onSubmit.bind(this);
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const onChangeClientUser = nextProps.clientUser.token != this.props.clientUser.token
-		if(onChangeClientUser){
-			nextProps.history.push('/messages', { some: 'state' })
+		const onChangeClientUser = nextProps.clientUser.token != this.props.clientUser.token;
+		if (onChangeClientUser) {
+			nextProps.history.push('/messages', { some: 'state' });
 		}
 	}
 
-	onSubmit(e){
+	onSubmit(e) {
 		e.preventDefault();
-		const {signin,signup,forgotpassword} = this.props
-		const {hash} = this.props.location
-		const email = this.textEmail.value || 'montoya332@live.com'
-		const password = this.textPassword.value || 'test123'
+		const {signin, signup, forgotpassword} = this.props;
+		const {hash} = this.props.location;
+		const email = this.textEmail.value || 'montoya332@live.com';
+		const password = this.textPassword.value || 'test123';
 		switch (hash) {
-			case '#signup':
-				return signup && signup({email,password})
-			case '#forgotpassword':
-				return forgotpassword && forgotpassword({email,password})
-			default :
-				return signin && signin({email,password})
+		case '#signup':
+			return signup && signup({email, password});
+		case '#forgotpassword':
+			return forgotpassword && forgotpassword({email, password});
+		default :
+			return signin && signin({email, password});
 		}
 	}
-	getButtonText(){
-		const {hash} = this.props.location
-		let btnText = 'Log in'
-		if(hash == '#signup'){
-			btnText = 'Sign Up'
-		} else if(hash == '#forgotpassword'){
-			btnText = 'Send Email'
+	getButtonText() {
+		const {hash} = this.props.location;
+		let btnText = 'Log in';
+		if (hash == '#signup') {
+			btnText = 'Sign Up';
+		} else if (hash == '#forgotpassword') {
+			btnText = 'Send Email';
 		}
-		return btnText
+		return btnText;
 	}
 	render() {
-		const {hash} = this.props.location
-		const showSignUp = hash == '#signup'
-		const btnText = this.getButtonText()
+		const {hash} = this.props.location;
+		const showSignUp = hash == '#signup';
+		const btnText = this.getButtonText();
 
 		return (
 			<div className="form__signin__container">
@@ -55,10 +55,10 @@ export class LoginContainer extends Component {
 					<Column small={12} large={6}>
 						<form className="form__signin" onSubmit={this.onSubmit}>
 							<div className="form__signin__group">
-								<input className="form-control" placeholder="Email" type="text" name="user[email]" ref={(input) => { this.textEmail = input; }}/>
+								<input className="form-control" placeholder="Email" type="text" name="user[email]" ref={(input) => { this.textEmail = input; }} />
 							</div>
 							<div className="form__signin__group">
-								<input className="form-control" placeholder="Password" type="password" name="user[password]" ref={(input) => { this.textPassword = input; }}/>
+								<input className="form-control" placeholder="Password" type="password" name="user[password]" ref={(input) => { this.textPassword = input; }} />
 							</div>
 							<button type="submit" className="button expanded">{btnText}</button>
 							<br />
@@ -69,14 +69,13 @@ export class LoginContainer extends Component {
 							</div>
 						</form>
 					</Column>
-					<Column small={12} large={3}/>
-					
+					<Column small={12} large={3} />
 				</Row>
 			</div>
-			)
+		);
 	}
 }
-function mapStateToProps(state,ownProps) {
+function mapStateToProps(state) {
 	const clientUser = state.clientUser.toJS();
 	return { clientUser };
 }

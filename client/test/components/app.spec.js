@@ -1,15 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import chai, { expect } from 'chai'
+import chai, { expect } from 'chai';
 // import App from 'ReactApp/components/app';
-const defaultProps = {}
-describe('App', function() {
+const defaultProps = {};
+describe('App', () => {
 	let wrapper;
-	beforeEach(function() {
-		wrapper = shallow( <div />);  
+	beforeEach(() => {
+		wrapper = shallow(<div />);
 	});
 
-	it('wrapper should exist', function() {
-		expect(wrapper.type()).to.equal('div')
+	it('wrapper should exist', () => {
+		expect(wrapper.type()).to.equal('div');
 	});
 });

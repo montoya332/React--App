@@ -11,21 +11,19 @@ class AutoSuggestComponent extends Component {
 			dataSource: []
 		};
 		this.onUpdateInput = _.throttle(this.onUpdateInput.bind(this), 1000);
-		this.onNewRequest = this.onNewRequest.bind(this)
+		this.onNewRequest = this.onNewRequest.bind(this);
 	}
-	onUpdateInput(searchText){
-		let dataSource = []
-		searchText && getBooks({ q: searchText, maxResults:5}).then(({data={}}) => {
-			if(data.items){
-				dataSource =  data.items.map( item => {
-					return renderSuggestion(item)
-				})
+	onUpdateInput(searchText) {
+		let dataSource = [];
+		searchText && getBooks({ q: searchText, maxResults: 5}).then(({data = {}}) => {
+			if (data.items) {
+				dataSource = data.items.map(item => renderSuggestion(item));
 			}
 			this.setState({ dataSource });
 		});
 	}
-	onNewRequest(chosenRequest, index){
-		const book = this.state.dataSource[index] || {}
+	onNewRequest(chosenRequest, index) {
+		const book = this.state.dataSource[index] || {};
 		book.id && this.props.setBookId(book.id);
 	}
 	render() {
@@ -35,7 +33,7 @@ class AutoSuggestComponent extends Component {
 				<AutoComplete
 					hintText="search"
 					filter={AutoComplete.noFilter}
-					openOnFocus={true}
+					openOnFocus
 					onNewRequest={this.onNewRequest}
 					onUpdateInput={this.onUpdateInput}
 					dataSource={dataSource}
@@ -44,18 +42,18 @@ class AutoSuggestComponent extends Component {
 		);
 	}
 }
-const renderSuggestion = book => {
+const renderSuggestion = (book) => {
 	const { title, subtitle, imageLinks } = book.volumeInfo;
 	return {
 		id: book.id,
 		text: title,
 		value: (
 			<CardHeader
-			  title={title}
-			  subtitle={subtitle}
-			  avatar={imageLinks.thumbnail}
+				title={title}
+				subtitle={subtitle}
+				avatar={imageLinks.thumbnail}
 			/>
 		),
 	};
-}
+};
 export default AutoSuggestComponent;

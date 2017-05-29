@@ -18,7 +18,7 @@
 		"no-tabs": 0,
 		"prefer-arrow-callback": 1,
 		"strict": 0,
-		"quotes": [1, "single"],
+		"quotes": [ 1, "single" ],
 		"indent": ["error", "tab"],
 		"comma-dangle": ["off"],
 		"import/extensions": 0,
@@ -28,18 +28,13 @@
 		"react/forbid-prop-types": 0,
 		// "react/jsx-tag-spacing": 0,
 		"react/jsx-indent": [1, "tab"],
+		"react/jsx-indent-props": [1, "tab"],
 		"react/jsx-closing-bracket-location": ["off"],
-		"react/jsx-filename-extension": [1, {
-			"extensions": [".js", ".jsx"]
-		}],
+		"react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
 		"react/jsx-space-before-closing": ["off"],
 		"react/prefer-stateless-function": ["off"],
-		"no-underscore-dangle": ["error", {
-			"allowAfterThis": true
-		}],
-		"no-unused-expressions": [1, {
-			"allowShortCircuit": true
-		}],
+		"no-underscore-dangle": [ "error", { "allowAfterThis": true }],
+		"no-unused-expressions": [1, { "allowShortCircuit": true}],
 		"import/no-extraneous-dependencies": 0, // TODO: Use import/resolver for webpack alias
 		"import/no-unresolved": ["error", {
 			"ignore": [

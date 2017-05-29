@@ -21,9 +21,9 @@ class WebpackTestConfig extends WebpackBaseConfig {
 	constructor() {
 		super();
 		const cssModulesQuery = {
-				modules: true,
-				importLoaders: 1,
-				localIdentName: '[name]-[local]-[hash:base64:5]'
+			modules: true,
+			importLoaders: 1,
+			localIdentName: '[name]-[local]-[hash:base64:5]'
 		};
 		this.config = {
 			devtool: 'inline-source-map',
@@ -32,7 +32,7 @@ class WebpackTestConfig extends WebpackBaseConfig {
 			],
 			externals: {
 				cheerio: 'window',
-				"jsdom": "window",
+				jsdom: 'window',
 				'react/addons': 'true',
 				'react/lib/ExecutionEnvironment': 'true',
 				'react/lib/ReactContext': 'true',
@@ -51,7 +51,7 @@ class WebpackTestConfig extends WebpackBaseConfig {
 				rules: [{
 					test: /\.(js|jsx)$/,
 					loader: 'babel-loader',
-					include: [].concat( this.includedPackages, [ this.srcPathAbsolute, this.testPathAbsolute ] )
+					include: [].concat(this.includedPackages, [this.srcPathAbsolute, this.testPathAbsolute])
 				}, {
 					test: /^.((?!cssmodule).)*\.(sass|scss)$/,
 					loader: 'null-loader'

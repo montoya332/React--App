@@ -11,9 +11,9 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 
 export default (props) => {
-	const renderMessage = (message={}, index,list) =>{
+	const renderMessage = (message = {}, index, list) => {
 		const sender = message.sentBy || {};
-		const isLastTile = list.length  == index + 1
+		const isLastTile = list.length == index + 1;
 		return (
 			<div key={index}>
 				<ListItem
@@ -28,10 +28,10 @@ export default (props) => {
 					}
 					secondaryTextLines={2}
 				/>
-				{!isLastTile && <Divider inset={true} />}
+				{!isLastTile && <Divider inset />}
 			</div>
-		)
-	}
+		);
+	};
 	return (
 		<div>
 			<List>
@@ -39,5 +39,5 @@ export default (props) => {
 				{props.messages.map(renderMessage)}
 			</List>
 		</div>
-	)
-}
+	);
+};
